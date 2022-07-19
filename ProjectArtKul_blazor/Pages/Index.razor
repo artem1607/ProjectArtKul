@@ -1,0 +1,17 @@
+﻿@page "/"
+
+<h1>Это чат</h1>
+<input @bind="text" />
+<button @onclick="OK">Отправить</button>
+@code {
+    string text = "Начать?";
+    List<string>
+    list = new List<string>();
+    void OK()
+    {
+        list.Add(text);
+    }
+}
+
+<br />
+@(text)

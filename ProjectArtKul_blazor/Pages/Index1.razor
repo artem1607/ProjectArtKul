@@ -1,0 +1,57 @@
+﻿@page "/Index1"
+<div>
+
+    <div style="width: 100%; background-color: deepskyblue; height: 140px; border: 1px solid; border-radius: 50px; font-size: x-large ">
+        <img src="lshup.jpg" style="width:100px; height:100px; margin-top: 30px; margin-left: 30px" />
+        <h1 style="text-align:center;color:white;float:right; margin:50px">ИнформБюро</h1>
+    </div>
+    <div style="width:75%; background-color:greenyellow; height:100%;float:right; border:1px solid; ">
+        Фото дня
+        <SurveyPrompt Title="Новости" />
+    </div>
+    <div style="width: 25%; background-color: mediumvioletred; height: 100%; float: left; border: 1px solid">
+        @(System.DateTime.Now)
+        <br />
+        @(me.name)
+        <br />
+        @(me.birth)
+        <br />
+        @(group[0].name)
+        <br />
+        @(group[0].birth)
+        @foreach(Person p in group)
+            {
+                <div>
+                    @(p.name)
+                    @(p.birth)
+                </div>
+                <br />
+            }
+
+    </div>
+    <a href="https://ssyp.ru/" class=""><h1 style="text-align:center;color:black">Подробнее</h1></a>
+
+</div>
+@code{
+    Person me = new Person();
+
+    public class Person
+    {
+        public string name;
+        public string birth;
+    }
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        me.name = "Ivan";
+        me.birth = "16.03.2007";
+    }
+    Person[] group = new Person[]
+    {
+                new Person{name = "Nikita", birth = "2005"},
+                new Person{name = "Artem", birth = "2007"},
+                new Person{name = "NeNikita", birth = "2008"},
+                new Person{name = "NeNikita", birth = "2009"}
+    };
+}
+
