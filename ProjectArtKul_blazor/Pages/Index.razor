@@ -1,17 +1,35 @@
 ﻿@page "/"
 
 <h1>Это чат</h1>
-<input @bind="text" />
+<input @bind="text" placeholder="" />
+<input @bind="text2" placeholder="имя"/>
 <button @onclick="OK">Отправить</button>
+<ProjectArtKul_blazor.Components.MyCom p1="Я ракета"></ProjectArtKul_blazor.Components.MyCom>
+
+@(arrg[num])
+@foreach (string s in list)
+{
+<div style="background-color:aquamarine; margin:10px;">
+    @(text2):
+    @(s)
+</div>
+
+@(arrg[num2])
+}
 @code {
-    string text = "Начать?";
+    string text = "";
+    string text2 = "";
     List<string>
     list = new List<string>();
     void OK()
     {
         list.Add(text);
     }
-}
+    string[] arrg = { "Привет!", "Пока", "Как дела" };
+    static Random rnd = new Random();
+    int num = rnd.Next(0, 2);
+    static Random rnd2 = new Random();
+    int num2 = rnd2.Next(0, 2);
 
+}
 <br />
-@(text)
