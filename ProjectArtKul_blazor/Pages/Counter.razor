@@ -6,6 +6,8 @@
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
+
+
 @code {
     private int currentCount = 0;
 
@@ -17,5 +19,14 @@
             currentCount++;
         }
     }
+    int n = 0;
+    void useK(int k)
+    {
+        n = k;
+    }
 }
+<h3>test </h3>
+@(n)
+<ProjectArtKul_blazor.Components.Component n="10" handler="(k)=>useK((int)k)"></ProjectArtKul_blazor.Components.Component>
+
 
