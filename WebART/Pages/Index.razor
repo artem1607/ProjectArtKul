@@ -1,7 +1,7 @@
 ﻿@page "/"
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,20 +10,66 @@
     <link rel="stylesheet" href="css/Class.css" />
 </head>
 <body>
-    <div>
-        <div class="shapka">
+    <div class="glav">
+        <div id="shapka">
+            <img src="css/i.png" style="width:50px; height:50px;margin-left:20px;" />
+            <a href="https://vk.com/lshup?ysclid=l5vyf54ahy354297898"><img src="css/vk.jpg" class="vk" /></a>
+            <a href="https://t.me/LSHUP"><img src="css/Telega.png" class="tel" /></a>
+            <a href="" class="href">ИнформБюро</a>
+            <a href="" class="href">Информация</a>
+            <a href="" class="href">Новости</a>
+
         </div>
-        <div class="photogal">
-        </div>
+
+        @*<div class="photogal">
+                <WebART.Components.Pictures></WebART.Components.Pictures>
+            </div>*@
+        <WebART.Components.Pictures1></WebART.Components.Pictures1>
+
         <div class="info">
+            <h1 style="text-align:center;">Информация</h1>
+            Летняя школа юных программистов, основанная в 1976 году академиком Андреем Петровичем Ершовым и проводящаяся ежегодно иси СО РАН, в течение многих лет выполняла функции отработки методики
+            преподавания программирования в образовательных учреждениях. ЛШЮП дала начало информатике как учебной дисциплине в школах, сформировала круг специалистов, до сих пор являющихся лидерами в мировом сообществе программистов.
         </div>
-        <div class="but1">
+            <p class="rad">
+            Как вам Летняя Школа Юных Программистов?<br />
+            <input type="radio" name="drink" value="rad1"> Мне не понравилась
+            <input type="radio" name="drink" value="rad2"> Можно и лучше
+            <input type="radio" name="drink" value="rad3"> Хорошо
+            <input type="radio" name="drink" value="rad4"> Отлично
+            <input type="radio" name="drink" value="rad5"> Лучше не бывает
+            <button>ОК</button>
+        </p>
+        <div class="but" style="margin-left:40%;background-color:red">
+
+            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"><h1 style="text-align:center; margin:70px;color:white">Не нажимать</h1></a>
         </div>
-        <div class="but2">
-        </div>
+        <div class="news"><WebART.Components.News></WebART.Components.News></div>
+        <WebART.Components.Registration></WebART.Components.Registration>
+
         <div class="footer">
+
         </div>
     </div>
 </body>
 </html>
+
+@page "/"
+<div style="float:right; width:auto"><webart.components.registration handler="(u)=>setuser((classes.person)u)"></webart.components.registration></div>
+@if (user != "")
+{
+    <div style="float:right; width:auto;">
+        aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+    </div>
+
+}
+@code {
+    public string user = "";
+
+    void setuser(classes.person u)
+    {
+        user = u.nickname;
+    }
+}
+
 

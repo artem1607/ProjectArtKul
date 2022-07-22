@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.32002.261
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectArtKul_blazor", "ProjectArtKul_blazor\ProjectArtKul_blazor.csproj", "{EE5C1297-ADB7-4673-B151-5A4C8E4DE1BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebART", "WebART\WebART.csproj", "{C0D1DE58-F400-466F-96B5-9EA029D9D033}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebART", "WebART\WebART.csproj", "{C0D1DE58-F400-466F-96B5-9EA029D9D033}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

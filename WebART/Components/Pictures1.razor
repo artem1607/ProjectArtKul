@@ -1,0 +1,84 @@
+﻿
+
+<div class="container">
+    <button class="btn-l" @onclick="previewPicture" style="width:auto;">
+        <img src="/arrows/left.png" style="border:hidden; width:27px" />
+    </button>
+    <img src="@path" style="width:1020px;height:600px" />
+    <button class="btn-r" @onclick="nextPicture" style="width:auto;">
+        <img src="/arrows/right.png" style="border: hidden; width: 27px; " />
+    </button>
+
+</div>
+
+
+<style>
+    .container {
+        position: relative;
+        width: 100%;
+        margin-top:50px;
+        text-align:center;
+    }
+
+        .container img {
+            width: 100%;
+            height: auto;
+        }
+
+        .container .btn-l {
+            position: absolute;
+            top: 45%;
+            left: 60px;
+            float: left;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            text-align: left;
+            background-color: transparent;
+        }
+
+        .container .btn-r {
+            position: absolute;
+            top: 45%;
+            float: right;
+            left: 1040px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            text-align: right;
+            background-color: transparent;
+        }
+</style>
+
+
+@code {
+    int picture = 1;
+    int maxPicture = 3;
+    string path = "";
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        path = "/images/img" + picture.ToString() + ".jpg";
+    }
+
+    void nextPicture()
+    {
+        picture++;
+        if (picture >= maxPicture + 1)
+        {
+            picture = 1;
+        }
+        path = "/images/img" + picture.ToString() + ".jpg";
+    }
+    void previewPicture()
+    {
+        picture--;
+        if (picture <= 0)
+        {
+            picture = maxPicture;
+        }
+        path = "/images/img" + picture.ToString() + ".jpg";
+    }
+
+}
