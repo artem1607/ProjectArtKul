@@ -54,7 +54,7 @@
 </body>
 </html>
 
-@page "/"
+
 <div style="float:right; width:auto"><webart.components.registration handler="(u)=>setuser((classes.person)u)"></webart.components.registration></div>
 @if (user != "")
 {
@@ -66,7 +66,7 @@
 @code {
     public string user = "";
 
-    void setuser(classes.person u)
+    void setuser(Classes.Person u)
     {
         user = u.nickname;
     }
