@@ -68,3 +68,44 @@
     margin-left:20%;
     margin-top: 20px;
 }
+
+/* скрываем чекбоксы и блоки с содержанием */
+.hide, .hide + label ~ div {
+    display: none;
+}
+    /* вид текста label */
+    .hide + label,
+    .hide:checked + label {
+        padding: 0;
+        color: blue;
+        cursor: pointer;
+        border-bottom: 1px dotted green;
+    }
+    /* вид текста label при активном переключателе */
+    .hide:checked + label {
+        color: red;
+        border-bottom: 0;
+    }
+        /* когда чекбокс активен показываем блоки с содержанием  */
+        .hide:checked + label + div {
+            display: block;
+            -moz-box-shadow: inset 3px 3px 10px #7d8e8f;
+            -webkit-box-shadow: inset 3px 3px 10px #7d8e8f;
+            box-shadow: inset 3px 3px 10px #7d8e8f;
+
+        }
+.text {
+    float: right;
+    margin-right:50px;
+    margin-top:10px;
+}
+.nobut {
+    float: left;
+    width: 400px;
+    margin-left:40%;
+    height: 200px;
+    background-color: red;
+    border-radius: 300px;
+    margin-top: 100px;
+    text-align: center;
+}
