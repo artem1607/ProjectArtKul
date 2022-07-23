@@ -21,42 +21,46 @@
             <div><WebART.Components.Registration></WebART.Components.Registration></div>
             <p style="text-align:center;font-family:LeoHand;font-size:45px;margin-top:-50px;margin-left:17%">Простота — залог надежности.</p>
             @*<a href="" class="href">Информация</a>
-        <a href="" class="href">Новости</a>*@
+            <a href="" class="href">Новости</a>*@
             <div class="but" style="margin-left:40%;background-color:red">
             </div>
         </div>
 
-            @*<div class="photogal">
+        @*<div class="photogal">
             <WebART.Components.Pictures></WebART.Components.Pictures>
         </div>*@
-            
-            <WebART.Components.Pictures1></WebART.Components.Pictures1>
-
-            <div class="info">
-                <h1 style="text-align:center;font-family:LeoHand">Информация</h1>
-                Летняя школа юных программистов, основанная в 1976 году академиком Андреем Петровичем Ершовым и проводящаяся ежегодно иси СО РАН, в течение многих лет выполняла функции отработки методики
-                преподавания программирования в образовательных учреждениях. ЛШЮП дала начало информатике как учебной дисциплине в школах, сформировала круг специалистов, до сих пор являющихся лидерами в мировом сообществе программистов.
-            </div>
-            <p class="rad">
-                Как вам Летняя Школа Юных Программистов?<br />
-                <input type="radio" name="drink" value="rad1"> Мне не понравилась
-                <input type="radio" name="drink" value="rad2"> Можно и лучше
-                <input type="radio" name="drink" value="rad3"> Хорошо
-                <input type="radio" name="drink" value="rad4"> Отлично
-                <input type="radio" name="drink" value="rad5"> Лучше не бывает
-                <button>ОК</button>
-            </p>
-
-            <div class="nobut">
-                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"><h1 style="text-align:center; margin:70px;color:white">Не нажимать</h1></a>
-            </div>
-            <div class="news"><WebART.Components.News></WebART.Components.News></div>
-
-
-            <div class="footer">
-
-            </div>
+        <div style="float:left; margin-left:45px;">
+            <WebART.Components.Button></WebART.Components.Button>
         </div>
+        <WebART.Components.Pictures1></WebART.Components.Pictures1>
+
+
+        <div class="info">
+            <h1 style="text-align:center;font-family:LeoHand">Информация</h1>
+            Летняя школа юных программистов, основанная в 1976 году академиком Андреем Петровичем Ершовым и проводящаяся ежегодно иси СО РАН, в течение многих лет выполняла функции отработки методики
+            преподавания программирования в образовательных учреждениях. ЛШЮП дала начало информатике как учебной дисциплине в школах, сформировала круг специалистов, до сих пор являющихся лидерами в мировом сообществе программистов.
+        </div>
+        <img src="css/c.jpg" style="width:900px; height:700px;margin-left:30%;" />
+        <p class="rad">
+            Как вам Летняя Школа Юных Программистов?<br />
+            <input type="radio" name="drink" value="rad1"> Мне не понравилась<br />
+            <input type="radio" name="drink" value="rad2"> Можно и лучше<br />
+            <input type="radio" name="drink" value="rad3"> Хорошо<br />
+            <input type="radio" name="drink" value="rad4"> Отлично<br />
+            <input type="radio" name="drink" value="rad5"> Лучше не бывает<br />
+            <button>ОК</button>
+        </p>
+
+        <div class="nobut">
+            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"><h1 style="text-align:center; margin:70px;color:white">Не нажимать</h1></a>
+        </div>
+        <div class="news"><WebART.Components.News></WebART.Components.News></div>
+
+
+        <div class="footer">
+
+        </div>
+    </div>
 </body>
 </html>
 
@@ -64,9 +68,9 @@
 <div style="float:right; width:auto"><webart.components.registration handler="(u)=>setuser((classes.person)u)"></webart.components.registration></div>
 @if (user != "")
 {
-    <div style="float:right; width:auto;">
-        aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-    </div>
+        <div style="float:right; width:auto;background-color:aquamarine">
+            sss
+        </div>
 
 }
 @code {

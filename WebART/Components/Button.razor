@@ -1,0 +1,54 @@
+﻿
+
+<button @onclick="@(async ()=> await invis())" style="background-color:transparent; border:hidden; float:right;  visibility:@(visib); "> <img src="/Павук.png" width="50" height="120" style="display: inline-block;float: right" /></button>
+@if (count == 10)
+{
+    <a href="https://www.youtube.com/watch?v=9bZkp7q19f0"> <div style=" float: right">  @r </div> </a>
+    c = false;
+    r = "";
+}
+@if (c == true)
+{
+
+    <div style=" float: right">@p</div>
+
+
+}
+
+
+@code {
+    string r = "Поймал!Забирай моё сокровище";
+    int count = 0;
+    bool c = false;
+    int inv = 100;
+    string visib = "visible";
+    string p = "Хахаха,не поймал!";
+    void taunt()
+    {
+        c = true;
+        inv = 0;
+        visib = "hidden";
+        p = "Хахаха,не поймал!";
+        count++;
+
+
+
+    }
+
+    void AsyncInvis()
+    {
+        System.Threading.Thread.Sleep(3000);
+        inv = 100;
+        visib = "visible";
+        c = false;
+        p = "";
+
+
+    }
+    async Task invis()
+    {
+        taunt();
+        await Task.Run(() => AsyncInvis());
+    }
+
+}
