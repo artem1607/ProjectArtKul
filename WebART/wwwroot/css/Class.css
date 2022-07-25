@@ -27,20 +27,26 @@
     padding: 20px;
     border-radius:50px;
 }
-.href{
-    float:right;
-    margin-right:80px;
+.href {
+    float: right;
+    margin-right: 80px;
     margin-top: 10px;
+    color: blue;
+    font-size: 17px;
+    margin-top: -20px;
+    margin-left:50px;
 }
 .vk {
     width: 50px;
     height: 50px;
     float: right;
+    margin-top:-30px;
 }
 .tel {
     width: 90px;
     height: 50px;
     float: right;
+    margin-top: -30px;
 }
 .but {
     float: left;
@@ -52,8 +58,9 @@
     text-align:center;
 }
 .news{
-    background-color:deepskyblue;
-    margin-top:400px;
+    /*background-color:deepskyblue;*/
+    margin-top:20px;
+    background-image:url(/css/back.jpg)
 }
 
 .rad{
@@ -92,8 +99,8 @@
         }
 .text {
     float: right;
-    margin-right:50px;
-    margin-top:10px;
+    margin-left: 50px;
+    margin-top: -20px;
 }
 .nobut {
     float: left;
@@ -104,4 +111,42 @@
     border-radius: 300px;
     margin-top: 100px;
     text-align: center;
+}
+.chat {
+    background-image: url(/css/backvk.png);
+    height: 450px;
+    float:left;
+    position:absolute;
+    margin-top:250px;
+
+}
+.footer{
+    background-color:aquamarine;
+    height:100px;
+}
+.topbutton {
+    width: 100px;
+    background: #f7f7f7;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    cursor: pointer;
+    color: #333;
+    font-family: verdana;
+    font-size: 12px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+    .topbutton:hover {
+        text-decoration: none;
+    }
+.topbutton:hover {
+    color: gray;
+}
+.menu{
+    margin-left: -30px
 }

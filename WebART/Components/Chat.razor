@@ -1,0 +1,51 @@
+﻿<div style="border: 1px solid; width: 400px; border-radius: 10px; height: 450px">
+
+    <input @bind="msg" style="width:400px; " />
+    <button class="btn btn-primary" @onclick="SendMessage">Отправить</button>
+    @foreach (Classes.Message msgI in messages)
+    {<div style="border:1px groove">
+            <div style="color:blue; ">@(msgI.getDate())</div>
+            <div>@(msgI.getMessage())</div>
+        </div>
+    }
+</div>
+@code {
+    [Parameter]
+    public string name { get; set; }
+
+
+    private string msg = "";
+
+    public static List<Classes.Message> messages = new List<Classes.Message>();
+
+
+    public DateTime date = DateTime.Now;
+
+    public void SendMessage()
+    {
+        ydalenie();
+        if (msg == "")
+        {
+            return;
+        }
+        Classes.Message message = new Classes.Message();
+        message.setDate();
+        message.setUser(name);
+        message.setMessage(msg);
+        messages.Add(message);
+    }
+    void ydalenie()
+    {
+        if (messages.Count > 5)
+        {
+            messages.RemoveAt(0);
+        }
+    }
+
+    //public void Sent()
+    //{ if (msg != "")
+    //    {
+    //        messages.Add(msg);
+    //    }
+    //}
+}
