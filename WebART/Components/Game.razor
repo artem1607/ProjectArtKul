@@ -1,0 +1,300 @@
+﻿@page "/test1"
+@if (l == 0)
+{
+
+    <table border="2">
+        <tr>
+            <td width="100" height="100" style="text-align:center; font-size: 40px; " @onclick="() => nagatie(1)">
+                @s1
+
+            </td>
+            <td width="100" height="100" style="text-align:center; font-size: 40px; " @onclick="() => nagatie(2)">
+                @s2
+
+            </td>
+            <td width="100" height="100" style="text-align:center; font-size: 40px; " @onclick="() => nagatie(3)">
+                @s3
+            </td>
+        </tr>
+        <tr>
+            <td width="100" height="100" style="text-align:center; font-size: 40px; " @onclick="() => nagatie(4)">
+                @s4
+
+            </td>
+            <td width="100" height="100" style="text-align:center; font-size: 40px; " @onclick="() => nagatie(5)">
+                @s5
+
+            </td>
+            <td width="100" height="100" style="text-align:center; font-size: 40px; " @onclick="() => nagatie(6)">
+                @s6
+            </td>
+        </tr>
+        <tr>
+            <td width="100" height="100" style="text-align:center; font-size: 40px; " @onclick="() => nagatie(7)">
+                @s7
+
+            </td>
+            <td width="100" height="100" style="text-align:center; font-size: 40px; " @onclick="() => nagatie(8)">
+                @s8
+
+            </td>
+            <td width="100" height="100" style="text-align:center; font-size: 40px; " @onclick="() => nagatie(9)">
+                @s9
+            </td>
+        </tr>
+
+
+    </table>
+}
+@if (l == 1)
+{
+    <div style="background-color:salmon;color:black; text-align:center;width:200px;height:50px;padding:10px;">@g</div>
+}
+@code
+{
+    string g = "";
+    int l = 0;
+    string u = "";
+    int b = 1;
+    int y1 = 0;
+    int y2 = 0;
+    int y3 = 0;
+    int y4 = 0;
+    int y5 = 0;
+    int y6 = 0;
+    int y7 = 0;
+    int y8 = 0;
+    int y9 = 0;
+    string s1 = "";
+    string s2 = "";
+    string s3 = "";
+    string s4 = "";
+    string s5 = "";
+    string s6 = "";
+    string s7 = "";
+    string s8 = "";
+    string s9 = "";
+
+    void nagatie(int k)
+    {
+        if (s1 == s2 & s2 == s3 & s1 != "" & s1 == "O")
+        {
+            l = 1;
+            g = "Победил игрок 1";
+        }
+        else if (s5 == s4 & s4 == s6 & s4 != "" & s4 == "O")
+        {
+            l = 1;
+            g = "Победил игрок 1";
+        }
+        else if (s7 == s8 & s7 == s9 & s9 != "" & s9 == "O")
+        {
+            l = 1;
+            g = "Победил игрок 1";
+        }
+        else if (s1 == s4 & s1 == s7 & s4 != "" & s4 == "O")
+        {
+            l = 1;
+            g = "Победил игрок 1";
+        }
+        else if (s2 == s5 & s2 == s8 & s8 != "" & s8 == "O")
+        {
+            l = 1;
+            g = "Победил игрок 1";
+        }
+        else if (s3 == s6 & s9 == s6 & s9 != "" & s9 == "O")
+        {
+            l = 1;
+            g = "Победил игрок 1";
+        }
+        else if (s1 == s5 & s5 == s9 & s1 != "" & s1 == "O")
+        {
+            l = 1;
+            g = "Победил игрок 1";
+        }
+        else if (s3 == s5 & s7 == s5 & s3 != "" & s3 == "O")
+        {
+            l = 1;
+            g = "Победил игрок 1";
+        }
+        else if (s1 == s2 & s2 == s3 & s1 != "" & s1 == "X")
+        {
+            l = 1;
+            g = "Победил игрок 2";
+        }
+        else if (s5 == s4 & s4 == s6 & s4 != "" & s4 == "X")
+        {
+            l = 1;
+            g = "Победил игрок 2";
+        }
+        else if (s7 == s8 & s7 == s9 & s9 != "" & s9 == "X")
+        {
+            l = 1;
+            g = "Победил игрок 2";
+        }
+        else if (s1 == s4 & s1 == s7 & s4 != "" & s4 == "X")
+        {
+            l = 1;
+            g = "Победил игрок 2";
+        }
+        else if (s2 == s5 & s2 == s8 & s8 != "" & s8 == "X")
+        {
+            l = 1;
+            g = "Победил игрок 2";
+        }
+        else if (s3 == s6 & s9 == s6 & s9 != "" & s9 == "X")
+        {
+            l = 1;
+            g = "Победил игрок 2";
+        }
+        else if (s1 == s5 & s5 == s9 & s1 != "" & s1 == "X")
+        {
+            l = 1;
+            g = "Победил игрок 2";
+        }
+        else if (s3 == s5 & s7 == s5 & s3 != "" & s3 == "X")
+        {
+            l = 1;
+            g = "Победил игрок 2";
+        }
+        else if (s1 != "" & s2 != "" & s3 != "" & s4 != "" & s5 != "" & s6 != "" & s7 != "" & s8 != "")
+        {
+            l = 1;
+            g = "Ничья";
+        }
+        else
+        {
+            if (k == 1 & y1 == 0)
+            {
+                if (b % 2 == 0)
+                {
+                    u = "X";
+                }
+                else
+                {
+                    u = "O";
+                }
+                y1++;
+                s1 = u;
+                b++;
+            }
+            if (k == 2 & y2 == 0)
+            {
+                if (b % 2 == 0)
+                {
+                    u = "X";
+                }
+                else
+                {
+                    u = "O";
+                }
+                y2++;
+                s2 = u;
+                b++;
+            }
+            if (k == 3 & y3 == 0)
+            {
+                if (b % 2 == 0)
+                {
+                    u = "X";
+                }
+                else
+                {
+                    u = "O";
+                }
+                y3++;
+                s3 = u;
+                b++;
+            }
+            if (k == 4 & y4 == 0)
+            {
+                if (b % 2 == 0)
+                {
+                    u = "X";
+                }
+                else
+                {
+                    u = "O";
+                }
+                y4++;
+                s4 = u;
+                b++;
+            }
+            if (k == 5 & y5 == 0)
+            {
+                if (b % 2 == 0)
+                {
+                    u = "X";
+                }
+                else
+                {
+                    u = "O";
+                }
+                y5++;
+                s5 = u;
+                b++;
+            }
+            if (k == 6 & y6 == 0)
+            {
+                if (b % 2 == 0)
+                {
+                    u = "X";
+                }
+                else
+                {
+                    u = "O";
+                }
+                y6++;
+                s6 = u;
+                b++;
+            }
+            if (k == 7 & y7 == 0)
+            {
+                if (b % 2 == 0)
+                {
+                    u = "X";
+                }
+                else
+                {
+                    u = "O";
+                }
+                y7++;
+                s7 = u;
+                b++;
+            }
+            if (k == 8 & y8 == 0)
+            {
+                if (b % 2 == 0)
+                {
+                    u = "X";
+                }
+                else
+                {
+                    u = "O";
+                }
+                y8++;
+                s8 = u;
+                b++;
+            }
+            if (k == 9 & y9 == 0)
+            {
+                if (b % 2 == 0)
+                {
+                    u = "X";
+                }
+                else
+                {
+                    u = "O";
+                }
+                y9++;
+                s9 = u;
+                b++;
+            }
+        }
+    }
+
+
+
+
+
+}

@@ -1,11 +1,13 @@
 ﻿<div style="border: 1px solid; width: 400px; border-radius: 10px; height: 450px">
 
-    <input @bind="msg" style="width:400px; " />
+    <input @bind="msg" placeholder="" style="width:400px; " />
     <button class="btn btn-primary" @onclick="SendMessage">Отправить</button>
     @foreach (Classes.Message msgI in messages)
-    {<div style="border:1px groove">
-            <div style="color:blue; ">@(msgI.getDate())</div>
-            <div>@(msgI.getMessage())</div>
+    {<div>
+         <div style=" background-color: aquamarine; margin-bottom:10px;">
+             <div style="color:blue;">@(msgI.getDate())</div>
+             <div>@(msgI.getMessage())</div>
+         </div>
         </div>
     }
 </div>
@@ -36,7 +38,7 @@
     }
     void ydalenie()
     {
-        if (messages.Count > 5)
+        if (messages.Count > 4)
         {
             messages.RemoveAt(0);
         }

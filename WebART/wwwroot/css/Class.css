@@ -33,20 +33,20 @@
     margin-top: 10px;
     color: blue;
     font-size: 17px;
-    margin-top: -20px;
+    margin-top: 30px;
     margin-left:50px;
 }
 .vk {
     width: 50px;
     height: 50px;
     float: right;
-    margin-top:-30px;
+    margin-top: 20px;
 }
 .tel {
     width: 90px;
     height: 50px;
     float: right;
-    margin-top: -30px;
+    margin-top: 20px;
 }
 .but {
     float: left;
@@ -100,7 +100,7 @@
 .text {
     float: right;
     margin-left: 50px;
-    margin-top: -20px;
+    margin-top: 30px;
 }
 .nobut {
     float: left;
@@ -148,5 +148,12 @@
     color: gray;
 }
 .menu{
-    margin-left: -30px
+    margin-left: -30px;
+    margin-top:-30px;
+}
+.CH {
+    position: absolute;
+    margin-top: 700px;
+    border-radius: 350px;
+    background-color: deepskyblue;
 }
