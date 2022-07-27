@@ -17,6 +17,7 @@
             <a href="https://vk.com/lshup?ysclid=l5vyf54ahy354297898"><img src="css/vk.jpg" class="vk" /></a>
             <a href="https://t.me/LSHUP"><img src="css/Telega.png" class="tel" /></a>
             <a href="" class="href">ИнформБюро</a>
+            <a href="" class="game" @onclick="games">Игры</a>
             <input class="hide" id="hd-2" type="checkbox">
             <label for="hd-2" class="text">Вход </label>
             <div><WebART.Components.Registration handler="(u) => setuser((Classes.Person)u)"></WebART.Components.Registration></div>
@@ -31,7 +32,7 @@
                 <WebART.Components.Pictures></WebART.Components.Pictures>
             </div>*@
         <div style="float:left; margin-left:45px;">
-            <WebART.Components.Button></WebART.Components.Button>
+            @*<WebART.Components.Button></WebART.Components.Button>*@
         </div>
         <WebART.Components.Pictures1></WebART.Components.Pictures1>
 
@@ -61,13 +62,14 @@
         <div class="footer">
             <WebART.Components.Footer></WebART.Components.Footer>
         </div>
-        <WebART.Components.Game></WebART.Components.Game>
     </div>
 </body>
 </html>
 
 
-@code{int p = 1;}
+@code{int p = 1;
+    int k = 0;
+}
 @if ((user != "") & (p == 1))
 {
 
@@ -76,30 +78,96 @@
     </div>
 
     <button class="CH" @onclick="close">Закрыть чат</button>
-    }
-    @if (p == 0)
+}
+@if (p == 0)
+{
+    <button class="CH" @onclick="returnp">Вернуться в чат</button>
+}
+@code{
+    void close()
     {
-            <button class="CH" @onclick="returnp">Вернуться в чат</button>
+        p = 0;
     }
-    @code{
-        void close()
-        {
-            p = 0;
-        }
+}
+@code{
+    void returnp()
+    {
+        p = 1;
     }
-    @code{
-        void returnp()
-        {
-            p = 1;
-        }
+}
+@code{void games()
+    {
+        k = 1;
     }
-    @code {
-public string user = "";
+}
+@if (k == 1)
+{
+    <div style="width: 300px; background: #00c9ff; background: linear-gradient(to right, #00c9ff, #92fe9d); box-shadow: 7px 7px 5px rgba(0,0,0,0.6);
+       position: absolute; float: right; margin-top: 340px; left: 80%; height: 110px; padding: 0px;">
+        <button style="background-color:red;color:black;float:right" @onclick="closegames">X</button>
+        <div style="width: 300px; margin-left:10%;margin-top:20px;">
+            <button class="" @onclick="krest2">Крестики нолики на двоих</button>
+        </div>
+        <div style="width: 300px; margin-left: 15%">
+            <button class="" @onclick="krestAI">Крестики нолики с ИИ</button>
+        </div>
+        <div style="width: 300px; margin-left: 30%">
+            <button class="" @onclick="nadoedalka">Надоедалка</button>
+        </div>
+    </div>
+}
+@code{
+    void closegames()
+    {
+        k = 0;
+    }
+}
+@code {
+    public string user = "";
 
     void setuser(Classes.Person u)
     {
         user = u.nickname;
     }
+}
+@code{
+    int t = 0;
+    void krest2()
+    {
+        t = 1;
+        v = 0;
+        q = 0;
     }
+}
+@if (t == 1 & k == 1 & v == 0& q == 0)
+{
+<div style="position: absolute; left: 80%; margin-top: 450px;  "><WebART.Components.Game></WebART.Components.Game></div>
+}
+@code{
+    int v = 0;
+    void nadoedalka()
+    {
+        v = 1;
+        t = 0;
+        q = 0;
+    }
+}
+@if (v == 1 & k == 1 & t == 0 & q == 0)
+{
+<div style="position: absolute; left: 80%; margin-top: 450px;  "><WebART.Components.Nadoedalka></WebART.Components.Nadoedalka></div>
+}
+@code{
+    int q = 0;
+    void krestAI()
+    {
+        q = 1;
+        t = 0;
+        v = 0;
+    }
+}
+@if (q == 1 & k == 1 & v == 0 & t == 0)
+{
+<div style="position: absolute; left: 80%; margin-top: 450px;  "><WebART.Components.KrestAI></WebART.Components.KrestAI></div>
+}
 
 

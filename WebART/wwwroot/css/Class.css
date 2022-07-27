@@ -115,10 +115,10 @@
 .chat {
     background-image: url(/css/backvk.png);
     height: 450px;
-    float:left;
-    position:absolute;
-    margin-top:250px;
-
+    float: left;
+    position: absolute;
+    margin-top: 250px;
+    margin-left: 20px;
 }
 .footer{
     background-color:aquamarine;
@@ -152,8 +152,24 @@
     margin-top:-30px;
 }
 .CH {
+    margin-left:20px;
     position: absolute;
     margin-top: 700px;
     border-radius: 350px;
     background-color: deepskyblue;
+}
+.href {
+    float: right;
+    margin-right: 80px;
+    margin-top: 10px;
+    color: blue;
+    font-size: 17px;
+    margin-top: 30px;
+    margin-left: 50px;
+}
+.game {
+    margin-left: 70px;
+    margin-top: 40px;
+    color: blue;
+    font-size: 17px;
 }

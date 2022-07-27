@@ -1,6 +1,6 @@
 ﻿<div style="border: 1px solid; width: 400px; border-radius: 10px; height: 450px">
 
-    <input @bind="msg" placeholder="" style="width:400px; " />
+    <input @bind="msg" placeholder="Это чат" style="width:400px; " />
     <button class="btn btn-primary" @onclick="SendMessage">Отправить</button>
     @foreach (Classes.Message msgI in messages)
     {<div>

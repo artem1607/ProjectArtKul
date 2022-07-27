@@ -1,0 +1,204 @@
+﻿@if (cr == true)
+{
+    <table border="1" style="background: #00c9ff; background: linear-gradient(to right, #00c9ff, #92fe9d); 
+        box-shadow: 7px 7px 5px rgba(0,0,0,0.6);-webkit-touch-callout:none;-webkit-user-select:none; 
+        -moz-user-select:none; -moz-user-select:none; user-select:none;">
+        <tr>
+            <td width="100" height="100" style="text-align:center; font-size: 40px; " @onclick="() => nagatie(1)">
+                @s[0]
+
+            </td>
+            <td width="100" height="100" style="text-align:center; font-size: 40px; " @onclick="() => nagatie(2)">
+                @s[1]
+
+            </td>
+            <td width="100" height="100" style="text-align:center; font-size: 40px; " @onclick="() => nagatie(3)">
+                @s[2]
+            </td>
+        </tr>
+        <tr>
+            <td width="100" height="100" style="text-align:center; font-size: 40px; " @onclick="() => nagatie(4)">
+                @s[3]
+
+            </td>
+            <td width="100" height="100" style="text-align:center; font-size: 40px; " @onclick="() => nagatie(5)">
+                @s[4]
+
+            </td>
+            <td width="100" height="100" style="text-align:center; font-size: 40px; " @onclick="() => nagatie(6)">
+                @s[5]
+            </td>
+        </tr>
+        <tr>
+            <td width="100" height="100" style="text-align:center; font-size: 40px; " @onclick="() => nagatie(7)">
+                @s[6]
+
+            </td>
+            <td width="100" height="100" style="text-align:center; font-size: 40px; " @onclick="() => nagatie(8)">
+                @s[7]
+
+            </td>
+            <td width="100" height="100" style="text-align:center; font-size: 40px; " @onclick="() => nagatie(9)">
+                @s[8]
+            </td>
+        </tr>
+
+
+    </table>
+}
+
+@*@foreach (int I in y)
+{
+    @I
+}*@
+@if (cr == false)
+{
+    <div style="background: #02aab0; background: -webkit-linear-gradient(to right, #02aab0, #00cdac); background: linear-gradient(to right, #02aab0, #00cdac);
+       font-size: 20px; width: 260px; margin-left: 20px; padding: 30px; margin-top:30px;">
+        @ss<br />
+        <button style="background: #dae2f8;  background: -webkit-linear-gradient(to right, #dae2f8, #d6a4a4);  background: linear-gradient(to right, #dae2f8, #d6a4a4);" @onclick="Again">Играть снова</button>
+    </div>
+}
+@code{
+    void Again()
+    {
+        ss = "Победил игрок X!";
+        cr = true;
+        b = 1;
+        y = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+        s = new string[] { "", "", "", "", "", "", "", "", "" };
+    }
+}
+@code
+{
+    string ss = "Победил игрок X!";
+    bool cr = true;
+    int b = 1;
+    int[] y = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    string[] s = new string[] { "", "", "", "", "", "", "", "", "" };
+    void protivnik()
+    {
+        Random rnd = new Random();
+        int rand = rnd.Next(9);
+        int bt = rand;
+        int n = y[bt];
+        if (y[bt] == 0)
+        {
+            s[bt] = "O";
+            y[bt] = 1;
+
+        }
+        else
+        {
+            protivnik();
+            return;
+        }
+
+    }
+    void nagatie(int k)
+    {
+        if (y[k - 1] == 0 & b <= 4)
+        {
+            y[k - 1]++;
+            s[k - 1] = "X";
+            b++;
+            protivnik();
+        }
+        else
+        {
+            y[k - 1]++;
+            s[k - 1] = "X";
+        }
+        if (s[0] == "X" & s[1] == "X" & s[2] == "X")
+        {
+            cr = false;
+            ss = "Победил игрок X!";
+        }
+        if (s[3] == "X" & s[4] == "X" & s[5] == "X")
+        {
+            cr = false;
+            ss = "Победил игрок X!";
+        }
+        if (s[6] == "X" & s[7] == "X" & s[8] == "X")
+        {
+            cr = false;
+            ss = "Победил игрок X!";
+        }
+        if (s[0] == "X" & s[3] == "X" & s[6] == "X")
+        {
+            cr = false;
+            ss = "Победил игрок X!";
+        }
+        if (s[1] == "X" & s[4] == "X" & s[7] == "X")
+        {
+            cr = false;
+            ss = "Победил игрок X!";
+        }
+        if (s[2] == "X" & s[5] == "X" & s[8] == "X")
+        {
+            cr = false;
+            ss = "Победил игрок X!";
+        }
+        if (s[0] == "X" & s[4] == "X" & s[8] == "X")
+        {
+            cr = false;
+            ss = "Победил игрок X!";
+        }
+        if (s[2] == "X" & s[4] == "X" & s[6] == "X")
+        {
+            cr = false;
+            ss = "Победил игрок X!";
+        }
+        if (s[0] == "O" & s[1] == "O" & s[2] == "O")
+        {
+            cr = false;
+            ss = "Победил игрок O!";
+        }
+        if (s[3] == "O" & s[4] == "O" & s[5] == "O")
+        {
+            cr = false;
+            ss = "Победил игрок O!";
+        }
+        if (s[6] == "O" & s[7] == "O" & s[8] == "O")
+        {
+            cr = false;
+            ss = "Победил игрок O!";
+        }
+        if (s[0] == "O" & s[3] == "O" & s[6] == "O")
+        {
+            cr = false;
+            ss = "Победил игрок O!";
+        }
+        if (s[1] == "O" & s[4] == "O" & s[7] == "O")
+        {
+            cr = false;
+            ss = "Победил игрок O!";
+        }
+        if (s[2] == "O" & s[5] == "O" & s[8] == "O")
+        {
+            cr = false;
+            ss = "Победил игрок O!";
+        }
+        if (s[0] == "O" & s[4] == "O" & s[8] == "O")
+        {
+            cr = false;
+            ss = "Победил игрок O!";
+        }
+        if (s[2] == "O" & s[4] == "O" & s[6] == "O")
+        {
+            cr = false;
+            ss = "Победил игрок O!";
+        }
+        if (y[0] == 1 & y[1] == 1 & y[2] == 1 & y[3] == 1 & y[4] == 1 & y[5] == 1 & y[6] == 1 & y[7] == 1 & y[8] == 1 & cr == true)
+        {
+            cr = false;
+            ss = "Ничья!";
+        }
+
+    }
+
+
+
+
+
+}

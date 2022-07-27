@@ -1,0 +1,85 @@
+﻿
+<div style="border: 1px solid; width: 300px; border-radius: 10px; background: #00c9ff; background: linear-gradient(to right, #00c9ff, #92fe9d); box-shadow: 7px 7px 5px rgba(0,0,0,0.6); ">
+    <input @bind="msg" style="width:300px" />
+    <button class="btn btn-primary" @onclick="SendMessage">Отправить</button>
+
+    @for (int i = 0; i < msges.Count(); i++)
+    {
+        if (i % 2 == 0)
+        {
+            <div style="color:green;"> @msges[i] </div>
+        }
+        else
+        {
+            <div style="color:blue"> @msges[i] </div>
+        }
+    }
+</div>
+@code {
+    void otvets()
+    {
+        Random rnd = new Random();
+        frq.Add("Когда началось время?");
+        frq.Add("Мы изобрели математику или обнаружили её?");
+        frq.Add("Куда исчезает мысль о которой забывает наш мозг?");
+        frq.Add("Кто решает, что такое хорошо, а что такое плохо?");
+        frq.Add("Если мы учимся и развиваемся с помощью ошибок, почему мы боимся их совершать?");
+        frq.Add("Что появилось первым – курица или яйцо?");
+        fra.Add("Какая прекрасная погода...");
+        fra.Add("Какой прекрасный день...");
+        fra.Add("Я сегодня танцевала балет и сломала ногу");
+        fra.Add("Штирлиц долго смотрел в одну точку. Потом перевел взгляд и посмотрел на другую. Двоеточие! - догадался Штирлиц.");
+        fra.Add("Инфаркты чаще случаются в понедельник.");
+        fra.Add("Виноград взрывается если засунуть в микроволновку");
+        fra.Add("Хочется гадость сделать, а на удачу ты подвернулся (-ась)");
+        frq.Add("-Сколько времени рыба плавает после еды?");
+        frq.Add("- Нам говорят не принимать сладости от незнакомцев, но на Хэллоуин они это продвигают! Зачем?");
+        frq.Add("-Как написать ноль римскими цифрами?");
+        frq.Add("-Как вы можете сказать, что честность - лучшая политика, если вы не пробовали других?");
+        frq.Add("-Если бы на Марсе были землетрясения, мы бы назвали их маршевками?");
+        frq.Add("-Если у света есть скорость, какова скорость тьмы?");
+        frq.Add("-Почему лед на вкус похож на воду?");
+        frq.Add("-Почему морковь более апельсиновая, чем апельсин?");
+        frq.Add("-Если время лечит все раны, почему наши пупки не закрываются?");
+        frq.Add("-Если американцы бросают рис на свадьбах, китайцы бросают гамбургеры?");
+        int m = msg.Count();
+        char t = msg[m - 1];
+        if (t == '?')
+        {
+            int num = rnd.Next(fra.Count());
+            string s = fra[num];
+            msges.Add(s);
+        }
+        else
+        {
+            int num2 = rnd.Next(frq.Count());
+            string s2 = frq[num2];
+            msges.Add(s2);
+        }
+    }
+    int i = 0;
+    string s = "";
+    string msg = "";
+    public List<string> msges = new List<string>();
+    public List<string> fra = new List<string>();
+    public List<string> frq = new List<string>();
+    public void SendMessage()
+    {
+        ydalenie();
+        if (msg == "")
+        {
+            return;
+        }
+        msges.Add(msg);
+        otvets();
+
+    }
+    void ydalenie()
+    {
+        if (msges.Count > 4)
+        {
+            msges.RemoveAt(0);
+            msges.RemoveAt(0);
+        }
+    }
+}
