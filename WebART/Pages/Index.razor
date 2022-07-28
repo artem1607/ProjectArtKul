@@ -102,22 +102,22 @@
 }
 @if (k == 1)
 {
-<div style="width: 300px; background: #00c9ff; background: linear-gradient(to right, #00c9ff, #92fe9d); box-shadow: 7px 7px 5px rgba(0,0,0,0.6);
+    <div style="width: 300px; background: #00c9ff; background: linear-gradient(to right, #00c9ff, #92fe9d); box-shadow: 7px 7px 5px rgba(0,0,0,0.6);
        position: absolute; float: right; margin-top: 330px; left: 80%; height: 140px; padding: 0px;">
-    <button style="background-color:red;color:black;float:right" @onclick="closegames">X</button>
-    <div style="width: 300px; margin-left:10%;margin-top:20px;">
-        <button style="background-color:white;" @onclick="krest2">Крестики нолики на двоих</button>
+        <button style="background-color:red;color:black;float:right" @onclick="closegames">X</button>
+        <div style="width: 300px; margin-left:10%;margin-top:20px;">
+            <button style="background-color:white;" @onclick="krest2">Крестики нолики на двоих</button>
+        </div>
+        <div style="width: 300px; margin-left: 15%">
+            <button style="background-color:white;" @onclick="krestAI">Крестики нолики с ИИ</button>
+        </div>
+        <div style="width: 300px; margin-left: 30%">
+            <button style="background-color:white;" @onclick="nadoedalka">Надоедалка</button>
+        </div>
+        @*<div style="width: 300px; margin-left: 10%">
+            <button style="background-color:white;" @onclick="SKL">Камень, ножницы, бумага</button>
+        </div>*@
     </div>
-    <div style="width: 300px; margin-left: 15%">
-        <button style="background-color:white;" @onclick="krestAI">Крестики нолики с ИИ</button>
-    </div>
-    <div style="width: 300px; margin-left: 30%">
-        <button style="background-color:white;" @onclick="nadoedalka">Надоедалка</button>
-    </div>
-    <div style="width: 300px; margin-left: 10%">
-        <button style="background-color:white;" @onclick="nadoedalka">Камень, ножницы, бумага</button>
-    </div>
-</div>
 }
 @code{
     void closegames()
@@ -131,8 +131,8 @@
     void setuser(Classes.Person u)
     {
         user = u.nickname;
-        
-        
+
+
     }
 }
 @code{
@@ -142,11 +142,12 @@
         t = 1;
         v = 0;
         q = 0;
+        //b = 0;
     }
 }
-@if (t == 1 & k == 1 & v == 0& q == 0)
+@if (t == 1 & k == 1 & v == 0 & q == 0 @*& b == 0*@)
 {
-<div style="position: absolute; left: 80%; margin-top: 470px;  "><WebART.Components.Game></WebART.Components.Game></div>
+    <div style="position: absolute; left: 80%; margin-top: 470px;  "><WebART.Components.Game></WebART.Components.Game></div>
 }
 @code{
     int v = 0;
@@ -155,11 +156,12 @@
         v = 1;
         t = 0;
         q = 0;
+        //b = 0;
     }
 }
-@if (v == 1 & k == 1 & t == 0 & q == 0)
+@if (v == 1 & k == 1 & t == 0 & q == 0 @*& b == 0*@)
 {
-<div style="position: absolute; left: 80%; margin-top: 470px;  "><WebART.Components.Nadoedalka></WebART.Components.Nadoedalka></div>
+    <div style="position: absolute; left: 80%; margin-top: 470px;  "><WebART.Components.Nadoedalka></WebART.Components.Nadoedalka></div>
 }
 @code{
     int q = 0;
@@ -168,11 +170,26 @@
         q = 1;
         t = 0;
         v = 0;
+        //b = 0;
     }
 }
-@if (q == 1 & k == 1 & v == 0 & t == 0)
+@if (q == 1 & k == 1 & v == 0 & t == 0 @*& b == 0*@)
 {
-<div style="position: absolute; left: 80%; margin-top: 470px;  "><WebART.Components.KrestAI></WebART.Components.KrestAI></div>
+    <div style="position: absolute; left: 80%; margin-top: 470px;  "><WebART.Components.KrestAI></WebART.Components.KrestAI></div>
 }
+<!--
+    int b = 0;
+    void SKL()
+    {
+        b = 1;
+        q = 0;
+        t = 0;
+        v = 0;
+    }
+}
+if (q == 0 & k == 1 & v == 0 & t == 0 & b == 1)
+{
+    <div style="position: absolute; left: 80%; margin-top: 470px;  ">-->@*<WebART.Components.SKL></WebART.Components.SKL>*@<!--</div>
+}-->
 
 

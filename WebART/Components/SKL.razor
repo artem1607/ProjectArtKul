@@ -1,0 +1,149 @@
+﻿@page "/2"
+<link href="css/fyle.css" rel="stylesheet" />
+@code{int u = 0;
+    void over()
+    {
+        u = 1;
+    } }
+@if (u == 1 & i > j)
+{
+    <div class="nav"><div class="you">You win!</div></div>
+}
+@if (u == 1 & i < j)
+{
+    <div class="nav"><div class="game">Game over</div></div>
+}
+@if (u == 1 & i == j)
+{
+    <div class="nav"><div class="draw">Draw</div></div>
+}
+@if (u == 0)
+{
+    <div class="fon">
+        <div class="nav">
+            <div style="height: 75px; width: 200px; border: 10px inset; text-align: center; margin-left: 700px; border-radius: 10px; border-color: aqua; font-size: 15px; background-color: white;">
+                <span style="margin-top:10px">°Ход User°</span>
+                <h5>@vb</h5>
+            </div>
+        </div>
+        <div class="na">
+            <span @onclick="() => Step(1)" class="text">Камень</span>
+            <span @onclick="() => Step(2)" class="text1">Ножницы</span>
+            <span @onclick="() => Step(3)" class="text2">Бумага</span>
+        </div>
+        <div class="nav">
+            <div class="bb">
+                @i
+            </div>
+            <div class="closes">
+                <div class="winbr">
+                    <div style="font-size:17.4px;" @onclick="over">Over game</div>
+                </div>
+            </div>
+
+            <div class="win">
+                <div class="winbr">
+                    @sa
+                </div>
+            </div>
+            <div class="bb1">
+                @j
+            </div>
+        </div>
+        <div class="nav">
+            <div class="fon3">
+                <span style="border-bottom: 4px solid #0094ff; width: 200px; border-right: 4px solid #0094ff; border-left: 4px solid #0094ff; border-bottom-right-radius: 7px; border-bottom-left-radius: 7px;">°Computer°</span>
+                <br>
+                <div class="winbr">
+                    <h5>@vv</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@code{
+    int i = 0;
+    int j = 0;
+    int messege = 0;
+    string vb = "";
+    string vv = "";
+    string sa = "";
+    void Step(int nom)
+    {
+        messege = nom;
+        if (messege == 1)
+        {
+            vb = "Камень";
+        }
+        if (messege == 2)
+        {
+            vb = "Ножницы";
+        }
+        if (messege == 3)
+        {
+            vb = "Бумага";
+        }
+        Rend();
+    }
+    void Rend()
+    {
+        Random rnd = new Random();
+        int ran = rnd.Next(3);
+        if (ran == 0)
+        {
+            vv = "Камень";
+        }
+        if (ran == 1)
+        {
+            vv = "Ножницы";
+        }
+        if (ran == 2)
+        {
+            vv = "Бумага";
+        }
+        if (vb == "Камень" & vv == "Камень")
+        {
+            sa = "Ничья";
+        }
+        if (vb == "Ножницы" & vv == "Ножницы")
+        {
+            sa = "Ничья";
+        }
+        if (vb == "Бумага" & vv == "Бумага")
+        {
+            sa = "Ничья";
+        }
+        if (vb == "Камень" & vv == "Ножницы")
+        {
+            sa = "Победил User";
+            i += 1;
+        }
+        if (vb == "Камень" & vv == "Бумага")
+        {
+            sa = "Победил Computer";
+            j += 1;
+        }
+
+        if (vb == "Ножницы" & vv == "Камень")
+        {
+            sa = "Победил Computer";
+            j += 1;
+        }
+        if (vb == "Ножницы" & vv == "Бумага")
+        {
+            sa = "Победил User";
+            i += 1;
+        }
+        if (vb == "Бумага" & vv == "Камень")
+        {
+            sa = "Победил User";
+            i += 1;
+        }
+        if (vb == "Бумага" & vv == "Ножницы")
+        {
+            sa = "Победил Computer";
+            j += 1;
+        }
+    }
+
+}
