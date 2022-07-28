@@ -1,7 +1,7 @@
 ﻿@if (cr == true)
 {
-    <table border="1" style="background: #00c9ff; background: linear-gradient(to right, #00c9ff, #92fe9d);
-        box-shadow: 7px 7px 5px rgba(0,0,0,0.6);-webkit-touch-callout:none;-webkit-user-select:none;
+    <table border="1" style="background: #00c9ff; background: linear-gradient(to right, #00c9ff, #92fe9d); 
+        box-shadow: 7px 7px 5px rgba(0,0,0,0.6);-webkit-touch-callout:none;-webkit-user-select:none; 
         -moz-user-select:none; -moz-user-select:none; user-select:none;">
         <tr>
             <td width="100" height="100" style="text-align:center; font-size: 40px; " @onclick="() => nagatie(1)">
@@ -48,9 +48,9 @@
 }
 
 @*@foreach (int I in y)
-    {
-        @I
-    }*@
+{
+    @I
+}*@
 @if (cr == false)
 {
     <div style="background: #02aab0; background: -webkit-linear-gradient(to right, #02aab0, #00cdac); background: linear-gradient(to right, #02aab0, #00cdac);
@@ -76,14 +76,14 @@
     bool q = true;
     int b = 1;
     int[] y = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-    string[] s = new string[] { "", "", "", "", "", "", "", "", "" };
+    string[] s = new string[] { "", "", "", "", "", "", "", "", ""};
     void protivnik()
     {
         Random rnd = new Random();
         int rand = rnd.Next(9);
         int bt = rand;
         int n = y[bt];
-        if (y[bt] == 0)
+        if (y[bt] == 0 )
         {
             s[bt] = "O";
             y[bt] = 1;
@@ -99,16 +99,16 @@
     void nagatie(int k)
     {
 
-        if (y[k - 1] == 0 & b <= 4 & s[k - 1] != "O")
+        if (y[k-1] == 0 & b <= 4 & s[k-1] != "O")
         {
-            y[k - 1] = y[k - 1] + 1;
+            y[k - 1] = y[k-1] + 1;
             s[k - 1] = "X";
             b++;
             protivnik();
         }
         else
         {
-            if (s[k - 1] != "O")
+            if (s[k-1] != "O")
             {
                 s[k - 1] = "X";
                 y[k - 1]++;
