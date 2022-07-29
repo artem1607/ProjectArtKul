@@ -1,5 +1,6 @@
 ﻿@page "/InformBuro"
 @page "/info/{idS}"
+
 <style>
     .gallery5 {
         overflow: hidden;
@@ -18,6 +19,7 @@
             object-fit: cover;
         }
 </style>
+
 <div class="sidebar">
     <div class="top-row pl-4">
         <p>
@@ -45,76 +47,147 @@
                     <WebART.Components.YearFilters Year_Search="(k) => YearFound((string)k)"></WebART.Components.YearFilters>
                 }
             </li>
-            <li class="nav-item px-3">
-                <div style="color: azure">Мастерская <button style="background-color: transparent" @onclick="MasterArrow"> <img src="@(Arrow)" width="10" /> </button></div>
-                @if (revealMaster == true)
-                {
-                    <WebART.Components.YearFilters___Копировать Master_Search="(k) => MasterFound((int)k)"></WebART.Components.YearFilters___Копировать>
-                }
-            </li>
+            @*<li class="nav-item px-3">
+                    <div style="color: azure">Мастерская <button style="background-color: transparent" @onclick="MasterArrow"> <img src="@(Arrow)" width="10" /> </button></div>
+                    @if (revealMaster == true)
+                    {
+                        <WebViewForNikitaFirstProject.Components.YearFilters___Копировать Master_Search="(k) => MasterFound((int)k)"></WebViewForNikitaFirstProject.Components.YearFilters___Копировать>
+                    }
+                </li>*@
             <li class="nav-item px-3">
                 @*<NavLink class="nav-link" href="fetchdata">
-            <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
-        </NavLink>*@
-                <button @onclick="SubmitClick">Submit</button>
+                        <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
+                    </NavLink>*@
+                <button class="btn btn-primary" @onclick="findUser">Найти</button>
 
-                <a href="#" title="" class="topbutton">Назад</a>
 
             </li>
         </ul>
     </div>
 </div>
 
-<div class="main" style="background-color: lightcyan">
-
+<div class="main">
+    
 
     <div class="content px-4">
         @*@Body*@
 
         <h1 style="text-align: center"><b>ИнформБюро</b></h1>
-        <input @bind="inputS" placeholder="Введите имя" />
-
-        <button class="btn btn-primary" @onclick="findUser">Найти</button>
+        <input @bind="inputS" placeholder="Введите имя" width="500" style="width:500px" />
         @if (finder != null)
         {<div>
                 @foreach (Classes.KeyValueBD ts in finder)
                 {
-                    @if (ts.vid == Classes.Vids.masterskaya)
+                    if (ts.vid == Checker || Checker == Classes.Vids.reflect)
                     {
-                        if (YearFilterFinal == "")
+                        @if (ts.vid == Classes.Vids.masterskaya)
                         {
-                            <div>Мастерская: <a href="/info/@ts.id">@ts.name</a>  ID:@ts.id</div>
-                        }
-                    }
-
-                    @if (ts.vid == Classes.Vids.doc)
-                    {
-                        <div>Документ: <a href="/info/@ts.id">@ts.name</a>  ID:@ts.id</div>
-
-                    }
-
-
-                    @if (ts.vid == Classes.Vids.person)
-                    {
-                        Classes.Person pers = (Classes.Person)ts;
-                        if (YearFilterFinal != "")
-                        {
-                            @foreach (Classes.Mastersk mast in Classes.Database.getMast(pers.id))
+                            Classes.Mastersk mast = (Classes.Mastersk)ts;
+                            if (YearFilterFinal == "" || (mast != null && mast.year != null && mast.year.Contains(YearFilterFinal)))
                             {
-                                if (mast != null && mast.year != null && mast.year.Contains(YearFilterFinal))
+                                <div style="border:1px solid">
+                                    Мастерская: <a href="/info/@ts.id">@ts.name</a>
+                                </div>
+                                <br>
+                            }
+
+
+                        }
+
+                        @if (ts.vid == Classes.Vids.doc)
+                        {
+                            Classes.Doc mast = (Classes.Doc)ts;
+                            if (YearFilterFinal == "" || (mast != null && mast.date != null && mast.date.Contains(YearFilterFinal)))
+                            {
+
+                                <div style="border:1px solid">
+
+                                    Документ:
+                                    <a href="/info/@ts.id">
+                                        <img src="Docs/GetImage?u=@Classes.Database.GetDoc(ts.id).uri&s=small" />
+                                    </a>
+                                    @if (mast.date != "")
+                                    {
+                                        <label>Дата: @mast.date</label>
+                                    }
+                                    else
+                                    {
+                                        <label>Дата: отсутствует</label>
+                                    }
+                                </div>
+                            }
+
+
+                        }
+
+
+                        @if (ts.vid == Classes.Vids.person)
+                        {
+                            Classes.Person pers = (Classes.Person)ts;
+                            List<Classes.Mastersk> mastersk = Classes.Database.getMast(pers.id).ToList();
+                            if (YearFilterFinal != "")
+                            {
+                                @foreach (Classes.Mastersk mast in Classes.Database.getMast(pers.id))
                                 {
-                                    <div>Человек: <a href="/info/@ts.id">@ts.name</a> ID:@ts.id IDMAST:@setPerson(ts).masterskaya</div>
-                                    
+                                    if (mast != null && mast.year != null && mast.year.Contains(YearFilterFinal))
+                                    {
+
+                                        List<Classes.Reflect> refl = Classes.Database.getReflects(pers.id).ToList();
+                                        <div style="border:1px solid">
+
+                                            @if (refl.Count() != 0)
+                                            {
+
+
+                                                <img src="Docs/GetImage?u=@Classes.Database.GetDoc(refl[0].toDoc).uri&s=small" />
+
+                                            }
+
+                                            else
+                                            {
+
+                                                <img src="/Photo does not exist.jpg" height="100">
+
+                                            }
+                                            <b><a href="/info/@ts.id">@ts.name</a></b> <br>
+                                            @if (mastersk.Count() != 0)
+                                            {
+                                                <label>@mastersk[0].year : Учавствовал в @mastersk[0].name</label>
+                                            }
+                                        </div>
+                                    }
                                 }
                             }
-                        }
-                        else
-                        {
-                            <div>Человек: <a href="/info/@ts.id">@ts.name</a> ID:@ts.id IDMAST:@setPerson(ts).masterskaya</div>
+                            else
+                            {
+                                List<Classes.Reflect> refl = Classes.Database.getReflects(pers.id).ToList();
+                                <div style="border:1px solid">
+                                    @if (refl.Count() != 0)
+                                    {
+
+                                        <img src="Docs/GetImage?u=@Classes.Database.GetDoc(refl[0].toDoc).uri&s=small" />
+                                    }
+
+                                    else
+                                    {
+                                        <div class="ramka">
+                                            <img src="/Photo does not exist.jpg" height="100">
+                                        </div>
+                                    }
+                                    <b><a href="/info/@ts.id">@ts.name</a></b> <br>
+                                    @if (mastersk.Count() != 0)
+                                    {
+                                        if (mastersk[0] != null)
+                                        {
+                                            <label>@mastersk[0].year : Учавствовал в @mastersk[0].name </label>
+                                        }
+                                    }
+                                </div>
+                            }
                         }
                     }
-
                 }
+   
             </div>
         }
         @if (obj != null)
@@ -136,41 +209,40 @@
                     <h1 style="font-size:25px">Учавствовал в</h1>
                     @foreach (Classes.Mastersk mast in Classes.Database.getMast(pers.id))
                     {@if (mast != null)
-                        {
-                            <div style= "width: 700px;">  @mast.name </div>
-                        }
+                {
+                            <div style="width: 700px;">  @mast.name </div>
                 }
+                    }
                     @foreach (Classes.Reflect refl in Classes.Database.getReflects(pers.id))
                     {
-                        <div><a href="/info/@Classes.Database.GetDoc(refl.toDoc).id">
-                         <img src="Docs/GetImage?u=@Classes.Database.GetDoc(refl.toDoc).uri&s=normal" />
+                        <div>
+                            <a href="/info/@Classes.Database.GetDoc(refl.toDoc).id">
+                                <img src="Docs/GetImage?u=@Classes.Database.GetDoc(refl.toDoc).uri&s=normal" />
                             </a>
                         </div>
                     }
                 </div>
             }
-
-
         }
 
 
-        <div><WebART.Components.Registration2></WebART.Components.Registration2></div>
-        @if (Button_clicked == true)
-        {
-
-            @foreach (Classes.Person i in (Classes.Database.MasterFilter(MasterFilterFinal)))
+            <div><WebART.Components.Registration2></WebART.Components.Registration2></div>
+            @if (Button_clicked == true)
             {
 
-                <div style="float:left; margin-left:10%">
-                    <br>
-                    <div style="text-align:center"><b>@(i.name)</b><br>@(i.city), @(i.school)<br>Учавствовал в @(i.masterskaya) в @(i.birth)</div>
+                @foreach (Classes.Person i in (Classes.Database.MasterFilter(MasterFilterFinal)))
+                {
 
-                </div>
+                    <div style="float:left; margin-left:10%">
+                        <br>
+                        <div style="text-align:center"><b>@(i.name)</b><br>@(i.city), @(i.school)<br>Учавствовал в @(i.masterskaya) в @(i.birth)</div>
+
+                    </div>
+                }
+
             }
 
-        }
-
-    </div>
+        </div>
 </div>
 
 @*
@@ -181,7 +253,7 @@
     [Parameter]
     public string idS { get; set; }
 
-
+    Classes.Vids Checker = Classes.Vids.person;
     public Classes.KeyValueBD obj;
     string Arrow = "/arrow_down.png";
     string Arrow1 = "/arrow_down.png";
@@ -192,7 +264,7 @@
     public string YearFilterFinal = "";
     public static int MasterFilterFinal = -1;
     public string ObjFilter = "";
-    public static string ObjFilterFinal = "";
+    public static string ObjFilterFinal = "Человек";
     string onPerson = "";
     string onMast = "";
     string onDoc = "";
@@ -224,6 +296,8 @@
             obj = Classes.Database.GetFromBD(int.Parse(idS));
             finder = null;
         }
+        Classes.Database.GetFromFile();
+        findUser();
     }
 
     private void ToggleNavMenu()
@@ -267,20 +341,34 @@
         }
     }
     bool Button_clicked = false;
-    private void SubmitClick()
+    string pic = "/Images/";
+
+    void findUser()
+
     {
+        obj = null;
         Button_clicked = true;
         YearFilterFinal = YearFilter;
         MasterFilterFinal = MasterFilter;
         ObjFilterFinal = ObjFilter;
+        if (ObjFilterFinal == "Человек")
+        {
+            Checker = Classes.Vids.person;
+        }
+        else if (ObjFilterFinal == "Документ")
+        {
+            Checker = Classes.Vids.doc;
+        }
+        else if (ObjFilterFinal == "Мастерская")
+        {
 
+            Checker = Classes.Vids.masterskaya;
+        }
+        else
+        {
+            Checker = Classes.Vids.reflect;
+        }
 
-    }
-    string pic = "/Images/";
-
-    void findUser()
-    {
-        obj = null;
         finder = Classes.Database.GetFromBDString(inputS);
     }
     Classes.Person setPerson(Classes.KeyValueBD ts)
