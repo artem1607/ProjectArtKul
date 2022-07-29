@@ -8,7 +8,8 @@
     {
         background = "white";
     }
-    <button style="background-color: @(background)" @onclick="() => func((string) i)">@i</button>
+    <button class="btn" style="background-color: @(background);" @onclick="() => func((string) i)">@i</button>
+    <div style="height:1px"><br /></div>
 }
 @code {
     [Parameter]

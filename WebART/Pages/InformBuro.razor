@@ -34,7 +34,7 @@
     <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
         <ul class="nav flex-column">
             <li class="nav-item px-3">
-                <div style="color: azure">Объект поиска <button style="background-color: transparent" @onclick="ObjArrow"> <img src="@(Arrow)" width="10" /> </button></div>
+                <div style="color: azure">Объект поиска <button style="background-color: transparent" @onclick="ObjArrow"> <img src="@(Arrow2)" width="10" /> </button></div>
                 @if (revealObj == true)
                 {
                     <WebART.Components.ObjFilter Obj_Search="(k) => ObjFound((string)k)"></WebART.Components.ObjFilter>
@@ -74,6 +74,7 @@
 
         <h1 style="text-align: center"><b>ИнформБюро</b></h1>
         <input @bind="inputS" placeholder="Введите имя" width="500" style="width:500px" />
+        <div><br /></div>
         @if (finder != null)
         {<div>
                 @foreach (Classes.KeyValueBD ts in finder)
@@ -263,7 +264,7 @@
     public int MasterFilter = -1;
     public string YearFilterFinal = "";
     public static int MasterFilterFinal = -1;
-    public string ObjFilter = "";
+    public string ObjFilter = "Человек";
     public static string ObjFilterFinal = "Человек";
     string onPerson = "";
     string onMast = "";
@@ -315,18 +316,7 @@
         {
             Arrow = "/arrow_down.png";
         }
-    }
-    private void MasterArrow()
-    {
-        revealMaster = !revealMaster;
-        if (Arrow1 == "/arrow_down.png")
-        {
-            Arrow1 = "/arrow_up.png";
-        }
-        else
-        {
-            Arrow1 = "/arrow_down.png";
-        }
+        findUser();
     }
     private void ObjArrow()
     {
@@ -339,6 +329,7 @@
         {
             Arrow2 = "/arrow_down.png";
         }
+        findUser();
     }
     bool Button_clicked = false;
     string pic = "/Images/";
