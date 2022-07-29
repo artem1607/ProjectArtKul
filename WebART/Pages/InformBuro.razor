@@ -224,8 +224,6 @@
             if (obj.vid == Classes.Vids.person)
             {
                 Classes.Person pers = (Classes.Person)obj;
-
-                <br />
                 <div style=" width: 700px;text-align:center;margin-left:27%; font-size:20px;">
                     <h1 style="font-size:25px">Учавствовал в</h1>
                     @foreach (Classes.Mastersk mast in Classes.Database.getMast(pers.id))
