@@ -1,6 +1,23 @@
 ﻿@page "/InformBuro"
 @page "/info/{idS}"
+<style>
+    .gallery5 {
+        overflow: hidden;
+        width: 480px;
+    }
 
+        .gallery5 .ramka {
+            float: left;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        .gallery5 img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+        }
+</style>
 <div class="sidebar">
     <div class="top-row pl-4">
         <p>
@@ -11,7 +28,7 @@
         <button class="navbar-toggler" @onclick="ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
-    </div>/
+    </div>
     <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
         <ul class="nav flex-column">
             <li class="nav-item px-3">
@@ -25,37 +42,36 @@
                 <div style="color: azure">Год обучения <button style="background-color: transparent" @onclick="YearArrow"> <img src="@(Arrow)" width="10" /> </button></div>
                 @if (revealYear == true)
                 {
-                    <WebViewForNikitaFirstProject.Components.YearFilters Year_Search="(k) => YearFound((string)k)"></WebViewForNikitaFirstProject.Components.YearFilters>
+                    <WebART.Components.YearFilters Year_Search="(k) => YearFound((string)k)"></WebART.Components.YearFilters>
                 }
             </li>
             <li class="nav-item px-3">
                 <div style="color: azure">Мастерская <button style="background-color: transparent" @onclick="MasterArrow"> <img src="@(Arrow)" width="10" /> </button></div>
                 @if (revealMaster == true)
                 {
-                    <WebViewForNikitaFirstProject.Components.YearFilters___Копировать Master_Search="(k) => MasterFound((int)k)"></WebViewForNikitaFirstProject.Components.YearFilters___Копировать>
+                    <WebART.Components.YearFilters___Копировать Master_Search="(k) => MasterFound((int)k)"></WebART.Components.YearFilters___Копировать>
                 }
             </li>
             <li class="nav-item px-3">
                 @*<NavLink class="nav-link" href="fetchdata">
-                        <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
-                    </NavLink>*@
+            <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
+        </NavLink>*@
                 <button @onclick="SubmitClick">Submit</button>
 
+                <a href="#" title="" class="topbutton">Назад</a>
 
             </li>
         </ul>
     </div>
 </div>
 
-<div class="main">
-    <div class="top-row px-4">
+<div class="main" style="background-color: lightcyan">
 
-    </div>
 
     <div class="content px-4">
         @*@Body*@
 
-        <h1 style="text-align: center"><b>Добро Пожаловать!</b></h1>
+        <h1 style="text-align: center"><b>ИнформБюро</b></h1>
         <input @bind="inputS" placeholder="Введите имя" />
 
         <button class="btn btn-primary" @onclick="findUser">Найти</button>
@@ -103,7 +119,7 @@
         }
         @if (obj != null)
         {
-            <div>@obj.name  ID:@obj.id</div>
+            <div style=" width: 700px;margin-left:27%;text-align:center;font-size:30px;">@obj.name  @*ID:@obj.id*@</div>
             if (obj.vid == Classes.Vids.doc)
             {
                 Classes.Doc docIn = (Classes.Doc)obj;
@@ -115,12 +131,13 @@
             {
                 Classes.Person pers = (Classes.Person)obj;
 
-
-                <div>
+                <br />
+                <div style=" width: 700px;margin-left:27%;text-align:center;font-size:20px;">
+                    <h1 style="font-size:25px">Учавствовал в</h1>
                     @foreach (Classes.Mastersk mast in Classes.Database.getMast(pers.id))
                     {@if (mast != null)
                         {
-                            <div>@mast.year : Учавствовал в @mast.name </div>
+                            <div style= "width: 700px;">  @mast.name </div>
                         }
                 }
                     @foreach (Classes.Reflect refl in Classes.Database.getReflects(pers.id))
@@ -263,6 +280,7 @@
 
     void findUser()
     {
+        obj = null;
         finder = Classes.Database.GetFromBDString(inputS);
     }
     Classes.Person setPerson(Classes.KeyValueBD ts)
