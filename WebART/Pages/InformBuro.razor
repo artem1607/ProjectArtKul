@@ -60,7 +60,7 @@
                 @*<NavLink class="nav-link" href="fetchdata">
                         <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
                     </NavLink>*@
-                <button class="btn btn-primary" @onclick="findUser">Найти</button>
+                <a href="/informburo"><button class="btn btn-primary" @onclick="findUser">Найти</button></a>
 
 
             </li>
@@ -188,32 +188,52 @@
                         }
                     }
                 }
-   
+
             </div>
         }
         @if (obj != null)
         {
-            <div style=" width: 700px;margin-left:27%;text-align:center;font-size:30px;">@obj.name  @*ID:@obj.id*@</div>
+
+
             if (obj.vid == Classes.Vids.doc)
-            {
+            {   <div style="text-align:center"><h1>Фотография</h1></div>
                 Classes.Doc docIn = (Classes.Doc)obj;
+                if (docIn.date != null)
+                    {
+                        <div style="text-align:center"><h4>Дата: @docIn.date</h4></div>
+                }
+                if (Classes.Database.GetPersonsDoc(docIn.id).Count() != 0)
+                    {
+                        <div style="text-align:center"><h2>На фотографии:</h2></div>
+                    }
+                    foreach (Classes.Person per in Classes.Database.GetPersonsDoc(docIn.id))
+                    {
+                        if (per != null)
+                        {
+                        <div style="text-align:center"><a href="/info/@per.id"><h5>@per.name</h5></a></div>
+                    }
+                }
                 <div>
-                    <img src="Docs/GetImage?u=@docIn.uri&s=normal" />
+                    <img src="Docs/GetImage?u=@docIn.uri" height="300" />
                 </div>
+            }
+            else
+            {
+                <div style=" width: 700px;margin-left:27%;text-align:center;font-size:30px;">@obj.name </div>
             }
             if (obj.vid == Classes.Vids.person)
             {
                 Classes.Person pers = (Classes.Person)obj;
 
                 <br />
-                <div style=" width: 700px;margin-left:27%;text-align:center;font-size:20px;">
+                <div style=" width: 700px;text-align:center;margin-left:27%; font-size:20px;">
                     <h1 style="font-size:25px">Учавствовал в</h1>
                     @foreach (Classes.Mastersk mast in Classes.Database.getMast(pers.id))
                     {@if (mast != null)
-                {
-                            <div style="width: 700px;">  @mast.name </div>
+                        {
+                            <a href="/info/@mast.id"><div>@mast.name</div></a>
+                        }
                 }
-                    }
                     @foreach (Classes.Reflect refl in Classes.Database.getReflects(pers.id))
                     {
                         <div>
@@ -224,26 +244,71 @@
                     }
                 </div>
             }
+            if (obj.vid == Classes.Vids.masterskaya)
+            {
+                Classes.Mastersk m = (Classes.Mastersk)obj;
+
+                @foreach (Classes.Person p in Classes.Database.GetPeoplesOld(m.id))
+                {
+                    if (p != null)
+                    {
+                        <div><a href="/info/@p.id">@p.GetName()</a></div>
+                        foreach (Classes.Reflect refl in Classes.Database.getReflects(p.id))
+                        {
+                            docsMastersk.Add(Classes.Database.GetDoc(refl.toDoc));
+
+                        }
+                    }
+                }@if (Classes.Database.GetPeople(m.id).Count() != 0)
+                {<div style="text-align:center"><h2>Участники:</h2></div>
+                    @foreach (Classes.Person p in Classes.Database.GetPeople(m.id))
+                    {
+                        if (p != null)
+                        {
+                            <div style="text-align:center"><a href="/info/@p.id"><h5>@p.GetName()</h5></a></div>
+                            foreach (Classes.Reflect refl in Classes.Database.getReflects(p.id))
+                            {
+                                docsMastersk.Add(Classes.Database.GetDoc(refl.toDoc));
+
+                            }
+                        }
+                    }
+                    <div style="text-align:center"><h2>Фотографии:</h2></div>
+                    <div style="text-align:center"><br /></div>
+                    @foreach (Classes.Doc doc in docsMastersk)
+                    {
+                        if (doc != null)
+                        {<div>
+                                <a href="/info/@doc.id">
+                                    <img src="Docs/GetImage?u=@doc.uri&s=normal" />
+                                </a>
+                                <br />
+                            </div>
+                        }
+                    }}
+
+            }
         }
 
 
-            <div><WebART.Components.Registration2></WebART.Components.Registration2></div>
-            @if (Button_clicked == true)
+
+        <div><WebART.Components.Registration2></WebART.Components.Registration2></div>
+        @if (Button_clicked == true)
+        {
+
+            @foreach (Classes.Person i in (Classes.Database.MasterFilter(MasterFilterFinal)))
             {
 
-                @foreach (Classes.Person i in (Classes.Database.MasterFilter(MasterFilterFinal)))
-                {
+                <div style="float:left; margin-left:10%">
+                    <br>
+                    <div style="text-align:center"><b>@(i.name)</b><br>@(i.city), @(i.school)<br>Учавствовал в @(i.masterskaya) в @(i.birth)</div>
 
-                    <div style="float:left; margin-left:10%">
-                        <br>
-                        <div style="text-align:center"><b>@(i.name)</b><br>@(i.city), @(i.school)<br>Учавствовал в @(i.masterskaya) в @(i.birth)</div>
-
-                    </div>
-                }
-
+                </div>
             }
 
-        </div>
+        }
+
+    </div>
 </div>
 
 @*
@@ -270,6 +335,7 @@
     string onMast = "";
     string onDoc = "";
     IEnumerable<Classes.KeyValueBD> finder;
+    List<Classes.Doc> docsMastersk = new List<Classes.Doc>();
     void YearFound(string year_num)
     {
         YearFilter = year_num;
@@ -298,6 +364,7 @@
             finder = null;
         }
         Classes.Database.GetFromFile();
+
         findUser();
     }
 
@@ -338,7 +405,7 @@
     void findUser()
 
     {
-        obj = null;
+        docsMastersk.Clear();
         Button_clicked = true;
         YearFilterFinal = YearFilter;
         MasterFilterFinal = MasterFilter;
@@ -360,8 +427,15 @@
         {
             Checker = Classes.Vids.reflect;
         }
-
-        finder = Classes.Database.GetFromBDString(inputS);
+        if (idS == "" || idS == null)
+        {
+            obj = null;
+            finder = Classes.Database.GetFromBDString(inputS);
+        }
+        else
+        {
+            finder = null;
+        }
     }
     Classes.Person setPerson(Classes.KeyValueBD ts)
     {
