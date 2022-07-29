@@ -151,9 +151,9 @@
 
                                             }
                                             <b><a href="/info/@ts.id">@ts.name</a></b> <br>
-                                            @if (mastersk.Count() != 0)
+                                            @if ( mastersk.Count() != 0 && mastersk[0] !=null)
                                             {
-                                                <label>@mastersk[0].year : Учавствовал в @mastersk[0].name</label>
+                                                <label>@mastersk[0].year : Участвовал в @mastersk[0].name</label>
                                             }
                                         </div>
                                     }
@@ -180,7 +180,7 @@
                                     {
                                         if (mastersk[0] != null)
                                         {
-                                            <label>@mastersk[0].year : Учавствовал в @mastersk[0].name </label>
+                                            <label>@mastersk[0].year : Участвовал в @mastersk[0].name </label>
                                         }
                                     }
                                 </div>
