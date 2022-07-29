@@ -9,7 +9,7 @@ namespace WebART.Controllers
 
     public class DocsController : Controller
     {
-        private static string Cpath = @"C:\Users\nsu\Desktop\БД\SypCassete_min\SypCassete\";
+        private static string Cpath = @"C:\Users\Миша\Desktop\БД\SypCassete_min\SypCassete\";
         //C:\Users\nsu\Desktop\БД\SypCassete_min\SypCassete\
 
         [HttpGet("docs/GetImage")]

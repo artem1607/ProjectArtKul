@@ -238,12 +238,15 @@
                         {
                             <a style="font-style:oblique" href="/info/@mast.id"><div>@mast.name</div></a>
                         }
-                }
+                      }@if (Classes.Database.getReflects(pers.id).Count() != 0)
+                    {
+                        <div style="text-align:center"><h2>Фотографии:</h2></div>
+                    } 
                     @foreach (Classes.Reflect refl in Classes.Database.getReflects(pers.id))
                     {
                         <div>
                             <a href="/info/@Classes.Database.GetDoc(refl.toDoc).id">
-                                <img src="Docs/GetImage?u=@Classes.Database.GetDoc(refl.toDoc).uri&s=normal" />
+                                <img style="text-align:center" src="Docs/GetImage?u=@Classes.Database.GetDoc(refl.toDoc).uri&s=normal" />
                             </a>
                         </div>
                     }
