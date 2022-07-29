@@ -31,6 +31,8 @@
             <span class="navbar-toggler-icon"></span>
         </button>
     </div>
+    <div style="height:5px"><br /></div>
+    <input @bind="inputS" placeholder="Введите имя" width="500" style="width:245px" />
     <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
         <ul class="nav flex-column">
             <li class="nav-item px-3">
@@ -73,8 +75,6 @@
         @*@Body*@
 
         <h1 style="text-align: center"><b>ИнформБюро</b></h1>
-        <input @bind="inputS" placeholder="Введите имя" width="500" style="width:500px" />
-        <div><br /></div>
         @if (finder != null)
         {<div>
                 @foreach (Classes.KeyValueBD ts in finder)
@@ -304,6 +304,7 @@
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
+        findUser();
     }
     private void YearArrow()
     {
