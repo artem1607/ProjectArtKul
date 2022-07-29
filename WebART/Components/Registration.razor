@@ -36,7 +36,7 @@
 
     string onBtn = "Зарегистрироваться";
     string onBtnE = "Войти";
-    public static List<WebART.Classes.Person> group = new List<Classes.Person>();
+    public static List<WebART.Classes.PersonMsg> group = new List<Classes.PersonMsg>();
 
     protected override void OnParametersSet()
     {
@@ -58,7 +58,7 @@
             return;
         }
 
-        foreach (Classes.Person p in group)
+        foreach (Classes.PersonMsg p in group)
         {
             if (p.nickname.ToLower() == nickname.ToLower())
             {
@@ -67,7 +67,7 @@
             }
         }
         auth = true;
-        Classes.Person person = new Classes.Person() { nickname = nickname, password = password };
+        Classes.PersonMsg person = new Classes.PersonMsg() { nickname = nickname, password = password };
         group.Add(person);
         saveUser();
         handler.InvokeAsync(person);
@@ -80,7 +80,7 @@
             onBtnE = "Заполните все поля";
             return;
         }
-        foreach (Classes.Person p in group)
+        foreach (Classes.PersonMsg p in group)
         {
             if (p.nickname.ToLower() == nickname.ToLower())
             {
@@ -100,7 +100,7 @@
         if (checkUser(nickname, password) == "yes")
         {
             auth = true;
-            handler.InvokeAsync(new Classes.Person() { nickname = nickname, password = password });
+            handler.InvokeAsync(new Classes.PersonMsg() { nickname = nickname, password = password });
             return;
         }
         else if (checkUser(nickname, password) == "wrong")
@@ -130,7 +130,7 @@
         System.IO.FileStream file = new System.IO.FileStream("Data/users.bin", System.IO.FileMode.OpenOrCreate, System.IO.FileAccess.ReadWrite);
         System.IO.BinaryWriter writer = new System.IO.BinaryWriter(file);
         writer.Write((long) group.Count());
-        foreach(Classes.Person p in group)
+        foreach(Classes.PersonMsg p in group)
         {
             writer.Write(p.nickname);
             writer.Write(p.password);
@@ -186,7 +186,7 @@
             {
                 string nickFromFile = reader.ReadString();
                 string passwordFromFile = reader.ReadString();
-                group.Add(new Classes.Person() { nickname = nickFromFile, password = passwordFromFile });
+                group.Add(new Classes.PersonMsg() { nickname = nickFromFile, password = passwordFromFile });
             }
             file.Close();
         }catch (System.IO.FileNotFoundException)

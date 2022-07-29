@@ -1,0 +1,274 @@
+﻿@page "/InformBuro"
+@page "/info/{idS}"
+
+<div class="sidebar">
+    <div class="top-row pl-4">
+        <p>
+            <a class="navbar-brand" href=" " style=" ">
+                <img src="/css/i.png" style="background-color: transparent; margin-top: 10%; width:25%">
+            </a>
+        </p>
+        <button class="navbar-toggler" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>/
+    <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+        <ul class="nav flex-column">
+            <li class="nav-item px-3">
+                <div style="color: azure">Объект поиска <button style="background-color: transparent" @onclick="ObjArrow"> <img src="@(Arrow)" width="10" /> </button></div>
+                @if (revealObj == true)
+                {
+                    <WebART.Components.ObjFilter Obj_Search="(k) => ObjFound((string)k)"></WebART.Components.ObjFilter>
+                }
+            </li>
+            <li class="nav-item px-3">
+                <div style="color: azure">Год обучения <button style="background-color: transparent" @onclick="YearArrow"> <img src="@(Arrow)" width="10" /> </button></div>
+                @if (revealYear == true)
+                {
+                    <WebViewForNikitaFirstProject.Components.YearFilters Year_Search="(k) => YearFound((string)k)"></WebViewForNikitaFirstProject.Components.YearFilters>
+                }
+            </li>
+            <li class="nav-item px-3">
+                <div style="color: azure">Мастерская <button style="background-color: transparent" @onclick="MasterArrow"> <img src="@(Arrow)" width="10" /> </button></div>
+                @if (revealMaster == true)
+                {
+                    <WebViewForNikitaFirstProject.Components.YearFilters___Копировать Master_Search="(k) => MasterFound((int)k)"></WebViewForNikitaFirstProject.Components.YearFilters___Копировать>
+                }
+            </li>
+            <li class="nav-item px-3">
+                @*<NavLink class="nav-link" href="fetchdata">
+                        <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
+                    </NavLink>*@
+                <button @onclick="SubmitClick">Submit</button>
+
+
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="main">
+    <div class="top-row px-4">
+
+    </div>
+
+    <div class="content px-4">
+        @*@Body*@
+
+        <h1 style="text-align: center"><b>Добро Пожаловать!</b></h1>
+        <input @bind="inputS" placeholder="Введите имя" />
+
+        <button class="btn btn-primary" @onclick="findUser">Найти</button>
+        @if (finder != null)
+        {<div>
+                @foreach (Classes.KeyValueBD ts in finder)
+                {
+                    @if (ts.vid == Classes.Vids.masterskaya)
+                    {
+                        if (YearFilterFinal == "")
+                        {
+                            <div>Мастерская: <a href="/info/@ts.id">@ts.name</a>  ID:@ts.id</div>
+                        }
+                    }
+
+                    @if (ts.vid == Classes.Vids.doc)
+                    {
+                        <div>Документ: <a href="/info/@ts.id">@ts.name</a>  ID:@ts.id</div>
+
+                    }
+
+
+                    @if (ts.vid == Classes.Vids.person)
+                    {
+                        Classes.Person pers = (Classes.Person)ts;
+                        if (YearFilterFinal != "")
+                        {
+                            @foreach (Classes.Mastersk mast in Classes.Database.getMast(pers.id))
+                            {
+                                if (mast != null && mast.year != null && mast.year.Contains(YearFilterFinal))
+                                {
+                                    <div>Человек: <a href="/info/@ts.id">@ts.name</a> ID:@ts.id IDMAST:@setPerson(ts).masterskaya</div>
+                                    
+                                }
+                            }
+                        }
+                        else
+                        {
+                            <div>Человек: <a href="/info/@ts.id">@ts.name</a> ID:@ts.id IDMAST:@setPerson(ts).masterskaya</div>
+                        }
+                    }
+
+                }
+            </div>
+        }
+        @if (obj != null)
+        {
+            <div>@obj.name  ID:@obj.id</div>
+            if (obj.vid == Classes.Vids.doc)
+            {
+                Classes.Doc docIn = (Classes.Doc)obj;
+                <div>
+                    <img src="Docs/GetImage?u=@docIn.uri&s=normal" />
+                </div>
+            }
+            if (obj.vid == Classes.Vids.person)
+            {
+                Classes.Person pers = (Classes.Person)obj;
+
+
+                <div>
+                    @foreach (Classes.Mastersk mast in Classes.Database.getMast(pers.id))
+                    {@if (mast != null)
+                        {
+                            <div>@mast.year : Учавствовал в @mast.name </div>
+                        }
+                }
+                    @foreach (Classes.Reflect refl in Classes.Database.getReflects(pers.id))
+                    {
+                        <div><a href="/info/@Classes.Database.GetDoc(refl.toDoc).id">
+                         <img src="Docs/GetImage?u=@Classes.Database.GetDoc(refl.toDoc).uri&s=normal" />
+                            </a>
+                        </div>
+                    }
+                </div>
+            }
+
+
+        }
+
+
+        <div><WebART.Components.Registration2></WebART.Components.Registration2></div>
+        @if (Button_clicked == true)
+        {
+
+            @foreach (Classes.Person i in (Classes.Database.MasterFilter(MasterFilterFinal)))
+            {
+
+                <div style="float:left; margin-left:10%">
+                    <br>
+                    <div style="text-align:center"><b>@(i.name)</b><br>@(i.city), @(i.school)<br>Учавствовал в @(i.masterskaya) в @(i.birth)</div>
+
+                </div>
+            }
+
+        }
+
+    </div>
+</div>
+
+@*
+    <h1 style="text-align: center"><b>Добро Пожаловать!</b></h1>
+    <div>@(master) @(year)</div>
+*@
+@code{
+    [Parameter]
+    public string idS { get; set; }
+
+
+    public Classes.KeyValueBD obj;
+    string Arrow = "/arrow_down.png";
+    string Arrow1 = "/arrow_down.png";
+    string Arrow2 = "/arrow_down.png";
+    string inputS = "";
+    public string YearFilter = "";
+    public int MasterFilter = -1;
+    public string YearFilterFinal = "";
+    public static int MasterFilterFinal = -1;
+    public string ObjFilter = "";
+    public static string ObjFilterFinal = "";
+    string onPerson = "";
+    string onMast = "";
+    string onDoc = "";
+    IEnumerable<Classes.KeyValueBD> finder;
+    void YearFound(string year_num)
+    {
+        YearFilter = year_num;
+    }
+    void MasterFound(int master_num)
+    {
+        MasterFilter = master_num;
+    }
+    void ObjFound(string obj_num)
+    {
+        ObjFilter = obj_num;
+    }
+    private bool revealYear = false;
+    private bool revealMaster = false;
+    private bool revealObj = false;
+    private bool collapseNavMenu = true;
+
+    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        if (idS != null)
+        {
+            obj = Classes.Database.GetFromBD(int.Parse(idS));
+            finder = null;
+        }
+    }
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+    private void YearArrow()
+    {
+        revealYear = !revealYear;
+        if (Arrow == "/arrow_down.png")
+        {
+            Arrow = "/arrow_up.png";
+        }
+        else
+        {
+            Arrow = "/arrow_down.png";
+        }
+    }
+    private void MasterArrow()
+    {
+        revealMaster = !revealMaster;
+        if (Arrow1 == "/arrow_down.png")
+        {
+            Arrow1 = "/arrow_up.png";
+        }
+        else
+        {
+            Arrow1 = "/arrow_down.png";
+        }
+    }
+    private void ObjArrow()
+    {
+        revealObj = !revealObj;
+        if (Arrow2 == "/arrow_down.png")
+        {
+            Arrow2 = "/arrow_up.png";
+        }
+        else
+        {
+            Arrow2 = "/arrow_down.png";
+        }
+    }
+    bool Button_clicked = false;
+    private void SubmitClick()
+    {
+        Button_clicked = true;
+        YearFilterFinal = YearFilter;
+        MasterFilterFinal = MasterFilter;
+        ObjFilterFinal = ObjFilter;
+
+
+    }
+    string pic = "/Images/";
+
+    void findUser()
+    {
+        finder = Classes.Database.GetFromBDString(inputS);
+    }
+    Classes.Person setPerson(Classes.KeyValueBD ts)
+    {
+        return (Classes.Person)ts;
+    }
+
+
+}

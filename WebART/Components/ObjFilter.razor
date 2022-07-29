@@ -1,0 +1,32 @@
+﻿@foreach (string i in Obj)
+{
+    @if (Current_Obj_Filter == i)
+    {
+        background = "cornflowerblue";
+    }
+    else
+    {
+        background = "white";
+    }
+    <button style="background-color: @(background)" @onclick="() => func((string) i)">@i</button>
+}
+@code {
+    [Parameter]
+    public EventCallback Obj_Search { get; set; }
+    List<string> Obj = new List<string>()
+{@"Человек", "Документ", "Мастерская"};
+    string Current_Obj_Filter = "";
+    string background = "white";
+    void func(string obj)
+    {
+        if (Current_Obj_Filter == obj)
+        {
+            Current_Obj_Filter = "";
+        }
+        else
+        {
+            Current_Obj_Filter = obj;
+        }
+        Obj_Search.InvokeAsync((string)Current_Obj_Filter);
+    }
+}

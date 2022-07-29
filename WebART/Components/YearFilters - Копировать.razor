@@ -1,0 +1,42 @@
+﻿@foreach (string i in MasterCount)
+{
+    @if (Current_Master_Filter == i)
+    {
+        background = "cornflowerblue";
+    }
+    else
+    {
+        background = "white";
+    }
+    <button style="background-color: @(background)" @onclick="() => func((string) i)">@i</button>
+}
+@code {
+    [Parameter]
+    public EventCallback Master_Search { get; set; }
+    List<string> MasterCount = new List<string>()
+{@"Отличаем Натали Портман от Киры Найтли", "Поколение Логики", "Много бит тому назад", "Сгенерируй их всех!",
+        "Вставайте, граф, вас ждут великие дела!", "Черепашка и программирование", "ЛШЮП Информбюро", "Обработка естественных языков на ДНК и белках"};
+    string Current_Master_Filter = "";
+    string background = "white";
+    int number = 0;
+    void func(string year)
+    {
+        if (Current_Master_Filter == year)
+        {
+            Current_Master_Filter = "";
+        }
+        else
+        {
+            Current_Master_Filter = year;
+        }
+        if (Current_Master_Filter == "")
+        {
+            number = 0;
+        }
+        else
+        {
+            number = 1;
+        }
+        Master_Search.InvokeAsync((int)MasterCount.IndexOf(Current_Master_Filter) + number);
+    }
+}

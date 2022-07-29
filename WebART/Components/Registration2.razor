@@ -1,0 +1,76 @@
+﻿<!--<div style="border: 1px solid; width: 250px; float: right; padding: 20px; margin-right: 70px; margin-top: 40px; box-shadow: 7px 7px 5px rgba(0,0,0,0.6); background-color:white">-->
+    @*<input @bind="name" placeholder="ФИО" />
+    <input @bind="school" placeholder="Школа" />
+    <input @bind="city" placeholder="Город" />
+    <input @bind="idMaster" placeholder="название мастерской" />
+    <input @bind="birth" placeholder="День рождение" />
+    <button class="btn btn-primary" @onclick="addPerson">@onBtn</button>
+    <button class="btn btn-primary" @onclick="Classes.Database.ReloadDB">Загрузить БД</button>*@
+
+
+<!--</div>-->
+
+@*@foreach(Classes.Person p in Classes.Database.persons)
+                {
+                    <div>@p.name  @p.masterskaya @p.id</div>
+                }
+    @foreach(Classes.Mastersk p in Classes.Database.mastersks)
+                {
+                    <div>@p.name  @p.description @p.id</div>
+                }*@
+
+
+@code {
+    [Parameter]
+    public EventCallback handler { get; set; }
+
+    // bool reg = false;
+
+
+    string name = "";
+    string school = "";
+    string city = "";
+    string idMaster;
+    string birth = "";
+
+
+
+    string onBtn = "Добавить";
+    // string onBtnE = "Войти";
+
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        Classes.Database.ReloadDB();
+        Classes.Database.GetFromFile();
+
+    }
+
+    private void addPerson()
+    {
+        if (name == "" || school == "" || city == "" || idMaster == "" || birth == "")
+        {
+            onBtn = "ЗАПОЛНИТЕ ПОЛЯ";
+            return;
+        }
+        int id = Classes.Database.GetIDFromStringMastersk(idMaster);
+        if (id == -99)
+        {
+            onBtn = "Мастерская не найдена";
+            return;
+        }
+        onBtn = "Добавить";
+        Classes.Database.dataListFirst.Add(new Classes.Person() { name = name, birth = birth, city = city, masterskaya = id, school = school, id = Classes.Database.SetNextID(), vid = Classes.Vids.person });
+        Classes.Database.SaveBD();
+        handler.InvokeAsync((List<Classes.KeyValueBD>)Classes.Database.dataListFirst);
+    }
+
+
+
+
+
+
+
+
+}

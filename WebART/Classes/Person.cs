@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace WebART.Classes
 {
-    public class Person
+    public class PersonMsg
     {
         public string nickname;
         public string password;
