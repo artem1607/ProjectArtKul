@@ -60,16 +60,16 @@
                 @*<NavLink class="nav-link" href="fetchdata">
                         <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
                     </NavLink>*@
-                <a href="/informburo"><button class="btn btn-primary" @onclick="findUser">Найти</button></a>
-
-
+                <a style="width:auto" href="/informburo"><button class="btn btn-primary" style="width:auto" @onclick="findUser">Найти</button></a>
             </li>
         </ul>
     </div>
+    <a href="/"><button class="btn" style="margin-left: 10px; margin-top:670px; background-color:lightblue; border-radius:10px ">Назад</button></a>
 </div>
 
+
 <div class="main">
-    
+
 
     <div class="content px-4">
         @*@Body*@
@@ -151,7 +151,7 @@
 
                                             }
                                             <b><a href="/info/@ts.id">@ts.name</a></b> <br>
-                                            @if ( mastersk.Count() != 0 && mastersk[0] !=null)
+                                            @if (mastersk.Count() != 0 && mastersk[0] != null)
                                             {
                                                 <label>@mastersk[0].year : Участвовал в @mastersk[0].name</label>
                                             }
@@ -180,7 +180,14 @@
                                     {
                                         if (mastersk[0] != null)
                                         {
-                                            <label>@mastersk[0].year : Участвовал в @mastersk[0].name </label>
+                                            if (mastersk[0].year != null)
+                                            {
+                                                <label>@mastersk[0].year : Участвовал в @mastersk[0].name </label>
+                                            }
+                                            else
+                                            {
+                                                <label>Участвовал в @mastersk[0].name </label>
+                                            }
                                         }
                                     }
                                 </div>
@@ -196,21 +203,21 @@
 
 
             if (obj.vid == Classes.Vids.doc)
-            {   <div style="text-align:center"><h1>Фотография</h1></div>
+            {<div style="text-align:center"><h1>Документ</h1></div>
                 Classes.Doc docIn = (Classes.Doc)obj;
-                if (docIn.date != null)
-                    {
-                        <div style="text-align:center"><h4>Дата: @docIn.date</h4></div>
+                if (docIn.date != "")
+                {
+                    <div style="text-align:center;"><h4>Дата: @docIn.date</h4></div>
                 }
                 if (Classes.Database.GetPersonsDoc(docIn.id).Count() != 0)
+                {
+                    <div style="text-align:center"><h2>На фотографии:</h2></div>
+                }
+                foreach (Classes.Person per in Classes.Database.GetPersonsDoc(docIn.id))
+                {
+                    if (per != null)
                     {
-                        <div style="text-align:center"><h2>На фотографии:</h2></div>
-                    }
-                    foreach (Classes.Person per in Classes.Database.GetPersonsDoc(docIn.id))
-                    {
-                        if (per != null)
-                        {
-                        <div style="text-align:center"><a href="/info/@per.id"><h5>@per.name</h5></a></div>
+                        <div style="text-align: center; font-style: oblique"><a href="/info/@per.id"><h5>@per.name</h5></a></div>
                     }
                 }
                 <div>
@@ -219,17 +226,17 @@
             }
             else
             {
-                <div style=" width: 700px;margin-left:27%;text-align:center;font-size:30px;">@obj.name </div>
+                <div style=" width: 700px; margin-left: 27%; text-align: center; font-size: 30px; font-style: italic ">@obj.name </div>
             }
             if (obj.vid == Classes.Vids.person)
             {
                 Classes.Person pers = (Classes.Person)obj;
                 <div style=" width: 700px;text-align:center;margin-left:27%; font-size:20px;">
-                    <h1 style="font-size:25px">Учавствовал в</h1>
+                    <h1 style="font-size:25px; ">Участвовал в</h1>
                     @foreach (Classes.Mastersk mast in Classes.Database.getMast(pers.id))
                     {@if (mast != null)
                         {
-                            <a href="/info/@mast.id"><div>@mast.name</div></a>
+                            <a style="font-style:oblique" href="/info/@mast.id"><div>@mast.name</div></a>
                         }
                 }
                     @foreach (Classes.Reflect refl in Classes.Database.getReflects(pers.id))
@@ -263,7 +270,7 @@
                     {
                         if (p != null)
                         {
-                            <div style="text-align:center"><a href="/info/@p.id"><h5>@p.GetName()</h5></a></div>
+                            <div style="text-align: center; font-style: oblique"><a href="/info/@p.id"><h5>@p.GetName()</h5></a></div>
                             foreach (Classes.Reflect refl in Classes.Database.getReflects(p.id))
                             {
                                 docsMastersk.Add(Classes.Database.GetDoc(refl.toDoc));
