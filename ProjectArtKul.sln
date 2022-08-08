@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32002.261
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectArtKul_blazor", "ProjectArtKul_blazor\ProjectArtKul_blazor.csproj", "{EE5C1297-ADB7-4673-B151-5A4C8E4DE1BE}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebART", "WebART\WebART.csproj", "{C0D1DE58-F400-466F-96B5-9EA029D9D033}"
 EndProject
 Global
@@ -13,10 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{EE5C1297-ADB7-4673-B151-5A4C8E4DE1BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EE5C1297-ADB7-4673-B151-5A4C8E4DE1BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EE5C1297-ADB7-4673-B151-5A4C8E4DE1BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EE5C1297-ADB7-4673-B151-5A4C8E4DE1BE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C0D1DE58-F400-466F-96B5-9EA029D9D033}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C0D1DE58-F400-466F-96B5-9EA029D9D033}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0D1DE58-F400-466F-96B5-9EA029D9D033}.Release|Any CPU.ActiveCfg = Release|Any CPU
